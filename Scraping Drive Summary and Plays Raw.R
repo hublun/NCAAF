@@ -14,27 +14,49 @@ dps <- game [10]
 dps <- str_split(unlist(dps), "\\n")
 dps <- unlist(dps)
 dps
+
  #--------------------------------------------
+drive_pattern <- paste(away_team,"[[:digit:]]{1,2}" ,home_team, sep = '')
+drive_index <- which(str_detect(dps, drive_pattern))
+dps[drive_index]
+
 rps_index <- which(str_detect(dps, "\\t{7}\\(")==TRUE) # regular plays not drives
 dps[rps_index]
+
 pos_index <- which(str_detect(dps, "\\t{5}\\d")==TRUE) # field positions
 dps[pos_index]
 
+koff_index <- which(str_detect(dps, "kickoff")==TRUE)
+koff_index
+punt_index <- which(str_detect(dps, "punt for")==TRUE)
+dps[punt_index]
+onsk_index <- which(str_detect(dps, "on-side")==TRUE)
+onsk_index
+stp_index <- sort(c(koff_index, punt_index, onsk_index))
+stp_index
+
+punt_index
+drive_index
 pos_index
 rps_index
 
+dprp_index <- sort(c(drive_index, pos_index, rps_index))
+
+dps[dprp_index]
+
+dps[dprp_index]
+
+
 length(dps)
+length(drive_index)
 length(rps_index)
 length(pos_index)
 
 
-str(drvs)
-drvs
-drvs <- drvs[which(str_length(drvs) != 0)] 
-drvs
 
+#============================= save to file ===============================================
 cwd <- getwd()
 cwd
 setwd(paste(cwd,"/Data", sep=""))
-write(drvs, file = paste("Game", game_id,  away_team, home_team, ".txt", sep = "_"))
+write(dps[dprp_index], file = paste("Game", game_id,  away_team, home_team, ".txt", sep = "_"))
 #============================ Retrieve All Drives only   =======================================
