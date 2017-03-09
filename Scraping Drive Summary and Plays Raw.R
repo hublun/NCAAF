@@ -52,7 +52,10 @@ length(drive_index)
 length(rps_index)
 length(pos_index)
 
-
+drives_only <- dps[drive_index]
+fos <- drives_only[1]
+fos
+unlist(convert_os(fos))
 
 #============================= save to file ===============================================
 cwd <- getwd()
