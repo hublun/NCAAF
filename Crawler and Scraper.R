@@ -19,13 +19,16 @@ str(drvs)
 drvs
 drvs <- drvs[which(str_length(drvs) != 0)] 
 drvs
-getwd()
-write(drvs, file = paste("~/Data/Game", game_id,  away_team, home_team, ".txt", sep = "_"))
+
+cwd <- getwd()
+cwd
+setwd(paste(cwd,"/Data", sep=""))
+write(drvs, file = paste("Game", game_id,  away_team, home_team, ".txt", sep = "_"))
 #============================ Retrieve All Drives only   =======================================
 
-pattern <- paste(away_team,"[[:digit:]]{1,2}" ,home_team, sep = '')
+drive_pattern <- paste(away_team,"[[:digit:]]{1,2}" ,home_team, sep = '')
 
-dlist <- which(str_detect(drvs, pattern)) # index of drive summaries only
+dlist <- which(str_detect(drvs, drive_pattern)) # index of drive summaries only
 
 st_list <- which(str_detect(drvs, "kickoff[[:print:]]{10,}return") == TRUE) # index of special teams plays only
 
