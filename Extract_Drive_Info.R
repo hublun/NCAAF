@@ -1,10 +1,6 @@
 convert_os <- function(os_string, sep_symbol=","){
   #print(os_string)
   pom <- unlist(str_split(os_string, ",\\s?"))
-  
-  #str_sub(os_string, start = , end= )
-  
-  
   result <- NULL
   num_plays <- 0
   
