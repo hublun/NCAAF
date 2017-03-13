@@ -17,9 +17,9 @@ convert_os <- function(os_string, sep_symbol=","){
   
   if (str_detect(pom[2], "yard.?")){
     pos <- str_locate(pom[2],"\\d{1,2}")
-    print(pos[1])
-    yards <- as.integer(str_sub(pom[2], start=1, end=pos))
-    print(yards)
+    #print(pos[1])
+    yards <- as.integer(str_sub(pom[2], start=1, end=pos[1]))
+    #print(yards)
   }
   #=============== time used and scores ===========
   os_time <- 0
@@ -28,9 +28,13 @@ convert_os <- function(os_string, sep_symbol=","){
   #-----------------------------------------------
   if (str_detect(pom[3], ":")){
     os_time_str <- str_extract(pom[3], "\\d{1,2}:\\d{2}")
-    ptr <- str_locate(os_time_str, ":")
-    minutes <- as.integer(str_sub(os_time_str, start=1, end=ptr-1))
-    seconds <- as.integer(str_sub(os_time_str, start=ptr+1,end=length(os_time_str)))
+    print(os_time_str)
+    ptr <- str_locate(os_time_str, ":")[2]
+    print(ptr)
+    minutes <- as.integer(str_sub(os_time_str, start=1, end=ptr[1]-1))
+    print(minutes)
+    seconds <- as.integer(str_sub(os_time_str, start=ptr[2]+1,end=length(os_time_str)))
+    print(seconds)
     os_time <- minutes*60 + seconds
   }
   
