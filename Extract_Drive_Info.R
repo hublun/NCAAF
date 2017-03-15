@@ -29,8 +29,17 @@ convert_os <- function(os_string, sep_symbol=","){
     seconds <- as.integer(str_sub(os_time_str, start=ptr[2]+1,end=str_length(os_time_str)))
     print(seconds)
     os_time <- minutes*60 + seconds
-    
+    #--------------------------------------------
+    twh <- unlist(str_split(pom[3], "[[:alpha:]]{3,4}")) #=== twh = time, away team score and home team score 
+    away_score <- as.integer(twh[2])
+    home_score <- as.integer(twh[3])
   }
   #-----------------------------------------------
-  return (list(result, num_plays, yards, os_time))
+  return (list(result, num_plays, yards, os_time, away_score, home_score))
+}
+
+#======================================================
+convert_all_oss <- function (oss){
+  
+  
 }
