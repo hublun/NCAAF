@@ -54,13 +54,21 @@ length(pos_index)
 
 drives_only <- dps[drive_index]
 fos <- drives_only
-fos
 
-unlist(convert_os(fos))
+fos
+#============== form the drives dataframe ++++++================================================
+drive.frame <- data.frame(outcome=character(), num_plays = integer(), yards = integer(), drive_time = integer(),
+                          away_score = integer(), home_score = integer(), stringsAsFactors = FALSE)
+
+for (i in 1:length(fos)){
+  drive.frame <-rbind(drive.frame, convert_os(fos[i]))
+}
 
 #============================= save to file ===============================================
 cwd <- getwd()
 cwd
 setwd(paste(cwd,"/Data", sep=""))
 write(dps[dprp_index], file = paste("Game", game_id,  away_team, home_team, ".txt", sep = "_"))
+
+write.csv(drive.frame, file = paste("Game", game_id,  away_team, home_team, ".csv", sep = "_"))
 #============================ Retrieve All Drives only   =======================================

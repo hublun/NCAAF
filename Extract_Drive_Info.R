@@ -22,12 +22,12 @@ convert_os <- function(os_string, sep_symbol=","){
   #-----------------------------------------------
   if (str_detect(pom[3], ":")){
     os_time_str <- str_extract(pom[3], "\\d{1,2}:\\d{2}")
-    print(os_time_str)
+    #print(os_time_str)
     ptr <- str_locate(os_time_str, ":")
     minutes <- as.integer(str_sub(os_time_str, start=1, end=ptr[1]-1))
-    print(str_length(os_time_str))
+    #print(str_length(os_time_str))
     seconds <- as.integer(str_sub(os_time_str, start=ptr[2]+1,end=str_length(os_time_str)))
-    print(seconds)
+    #print(seconds)
     os_time <- minutes*60 + seconds
     #--------------------------------------------
     twh <- unlist(str_split(pom[3], "[[:alpha:]]{3,4}")) #=== twh = time, away team score and home team score 
@@ -35,11 +35,9 @@ convert_os <- function(os_string, sep_symbol=","){
     home_score <- as.integer(twh[3])
   }
   #-----------------------------------------------
-  return (list(result, num_plays, yards, os_time, away_score, home_score))
+  return(data.frame(outcome=result, num_plays = num_plays, yards = yards, drive_time = os_time,
+                    away_score = away_score, home_score = home_score, stringsAsFactors = FALSE))
+  #return (list(result, as.character(num_plays), as.character(yards), as.character(os_time), as.character(away_score), as.character(home_score)))
 }
 
 #======================================================
-convert_all_oss <- function (oss){
-  
-  
-}
