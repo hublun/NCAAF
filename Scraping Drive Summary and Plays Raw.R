@@ -63,7 +63,8 @@ drive.frame <- data.frame(outcome=character(), num_plays = integer(), yards = in
 for (i in 1:length(fos)){
   drive.frame <-rbind(drive.frame, convert_os(fos[i]))
 }
-
+#-----------------------------------------------------------------
+drive.frame <- cbind(drive.frame, Game_ID = rep(game_id, nrow(drive.frame)), Away_Team = rep(away_team, nrow(drive.frame)), Home_Team = rep(home_team, nrow(drive.frame)))
 #============================= save to file ===============================================
 cwd <- getwd()
 cwd
