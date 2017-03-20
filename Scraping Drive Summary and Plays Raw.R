@@ -1,5 +1,5 @@
 #==================================== Input Parameters ================================
-game_id = "400876048"   #'400876570'
+game_id =  "400869810" #"400876048"   #'400876570'
 #===================================== Read  in Whole Page=================================================
 web_page_text <- getURLContent(paste('http://www.espn.com/college-football/playbyplay?gameId', game_id, sep = '='))
 print(attributes(web_page_text))
