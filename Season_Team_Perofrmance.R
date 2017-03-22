@@ -1,0 +1,5 @@
+web_page_text <- getURLContent("http://www.espn.com/college-football/team/stats/_/id/333/year/2007")
+print(attributes(web_page_text))
+tree <- htmlTreeParse(web_page_text, useInternalNodes = TRUE, asText = TRUE, isHTML = TRUE)
+print(attributes(tree))
+print(tree)
