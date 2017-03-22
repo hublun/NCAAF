@@ -13,7 +13,7 @@ convert_os <- function(os_string, sep_symbol=","){
   
   if (str_detect(pom[2], "yard.?")){
     pos <- str_locate(pom[2],"\\d{1,2}")
-    yards <- as.integer(str_sub(pom[2], start=1, end=pos[1]))
+    yards <- as.integer(str_sub(pom[2], start=1, end=pos[2]))
   }
   #=============== time used and scores ===========
   os_time <- 0

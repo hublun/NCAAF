@@ -1,5 +1,5 @@
 #==================================== Input Parameters ================================
-game_id =  "400869810" #"400876048"   #'400876570'
+game_id = '400876570'
 #===================================== Read  in Whole Page=================================================
 web_page_text <- getURLContent(paste('http://www.espn.com/college-football/playbyplay?gameId', game_id, sep = '='))
 print(attributes(web_page_text))
@@ -28,13 +28,13 @@ dps <- unlist(dps)
  #--------------------------------------------
 drive_pattern <- paste(away_team,"[[:digit:]]{1,2}" ,home_team, sep = '')
 drive_index <- which(str_detect(dps, drive_pattern))
-dps[drive_index]
+#dps[drive_index]
 
 rps_index <- which(str_detect(dps, "\\t{7}\\(")==TRUE) # regular plays not drives
-dps[rps_index]
+#dps[rps_index]
 
 pos_index <- which(str_detect(dps, "\\t{5}\\d")==TRUE) # field positions
-dps[pos_index]
+#dps[pos_index]
 
 koff_index <- which(str_detect(dps, "kickoff")==TRUE)
 punt_index <- which(str_detect(dps, "punt for")==TRUE)
