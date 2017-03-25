@@ -23,5 +23,6 @@ schedules.tables$V4 # all scores with W or L
 nrow(schedules.tables)
 team.record.year_end <- schedules.tables$V4[nrow(schedules.tables)]
 print(team.record.year_end)
-str_de
+
+str_split(team.record.year_end, "-")
 #===================================================================
