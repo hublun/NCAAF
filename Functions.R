@@ -9,4 +9,5 @@ convert_game_clock <- function(time_string, sep_symbol=":"){
   return (vec[1]*60+vec[2]+(4-vec[3])*15*60)
   }
 #-------------------------------------------
-#========================= extract info from drive summaries ================
+
+#======================== ================
