@@ -15,23 +15,47 @@ club.h3s <- xpathSApply(club.tree, "//h3") # get all h3 var names of interest
 
 club.h3s
 
-club.latt <- club.h3s[1]
+att <- club.h3s[7]
+is.AttendanceNode <- function(att) {
+  return (str_detect(xmlValue(att[[1]]), "Attendance"))
+}
 
-xmlParent(club.latt[[1]]) # find the parent node of largets attendance
+is.AttendanceNode(att)
 
+getAttendance <- function(att){
+  var.name = paste(str_replace_all(str_replace_all(xmlValue(att[[1]]), "\\W+", ""), " ", "_"), sep=".")
+  var.name
+  att.parent <- xmlParent(att[[1]]) # find the parent node of largets attendance
+  #names(club.latt.parent)
+  #names(xmlChildren(club.latt.parent))
+  gg <- xmlElementsByTagName(att.parent, "p", recursive = TRUE)
+  #length(gg)
+  var.value <- as.integer(str_replace_all(xmlValue(gg[[length(gg)]]), "\\W+", ""))
+  att.frame <- data.frame(var.value)
+  names(att.frame) <- var.name # dynamically assign column names
+  return (att.frame)
+  #return (data.frame(var.name, var.value))
+}
 
-mhg <- club.divs[[1]]
-str(mhg)
- 
-xmlName(mhg)
-names(mhg)  # child nodes of this node
-xmlAttrs(mhg) # all attributes
+getAttendance(club.h3s[7])
 
+getAllAttendance <- function(h3s){
+ at.fr <- data.frame()
+ for (i in 1:length(h3s)){
+   if (is.AttendanceNode(h3s[i])){
+     at.fr <- cbind(at.fr, getAttendance(h3s[i]))
+   }
+ }
+ return (at.fr)
+}
 
-xmlChildren(mhg)[4]
-xmlParent(mhg)[4]
-xmlValue(mhg)
+getAllAttendance(club.h3s)
 
-child.content <- xmlSApply(mhg, xmlValue) # loop over the nodes inside mhg and get the content as s string
+#mhg <- club.divs[[1]]
+#str(mhg)
+#xmlName(mhg)
+#names(mhg)  # child nodes of this node
+#xmlAttrs(mhg) # all attributes
+#child.content <- xmlSApply(mhg, xmlValue) # loop over the nodes inside mhg and get the content as s string
 
  
