@@ -8,12 +8,11 @@ web_page_text <-getURLContent(url.1)
 club.tree <- htmlTreeParse(web_page_text, useInternalNodes = TRUE, asText = TRUE, isHTML = TRUE)
 #print(attributes(tree))
 print(club.tree)
-write(club.tree, file="ss.txt")
 #============== XPath =====select nodes anywhere in the document for the <div> tags==========
 club.divs <- xpathSApply(club.tree, "//div[@class='stat-score']")
 
 mhg <- club.divs[[1]]
-mhg
+str(mhg)
 
-scores <- xpathSApply(mhg, "//div[@class='team-scores']")
+scores <- xpathSApply(mhg, "//div/div/span/text()")
 scores

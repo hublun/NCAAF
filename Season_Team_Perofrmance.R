@@ -1,4 +1,4 @@
-team.id <- 166
+team.id <- 204
 
 #team.year <- 2007
 #==============================extract season stats =======================================================
@@ -113,4 +113,4 @@ for (i in 2004:2016)
  team.frame <- rbind(team.frame, stats_by_team_year(team.id,i))
 
 team.frame
-write.csv(team.frame, file = paste("Team", team.id, ".csv", sep = "_"))
+write.csv(team.frame, file = paste("Team", team.id, "_2004_2016.csv", sep = ""))
