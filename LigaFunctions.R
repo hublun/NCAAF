@@ -47,14 +47,8 @@ getAttendance <- function(att){
   return (att.frame)
   #return (data.frame(var.name, var.value))
 }
-#===================== form all sttendance data.frame =====================
-club.frame = data.frame(club.season)
-names(club.frame) <- "Season"
-club.frame
-att.index <- getAllAttendanceNodes(club.h3s)
-for (i in att.index)
-  club.frame <- cbind.data.frame(club.frame, getAttendance(club.h3s[i]))
-club.frame
+#==================
+
 #==================================end of attendance extraction ========================================
 
 getScoreResult <- function(h3p.node){
@@ -62,7 +56,7 @@ getScoreResult <- function(h3p.node){
   p.var.name <- paste(str_replace_all(str_replace_all(xmlValue(h3p.node[[1]]), "\\W+", ""), " ", "_"), sep=".")
   p.var.name # get performance variable name
   
-  h3p.parent.node <- xmlParent(h3p.node) # get parent node of the current h3 node
+  h3p.parent.node <- xmlParent(h3p.node[[1]]) # get parent node of the current h3 node
   h3p.parent.node
   
   #game.nodes <- xmlElementsByTagName(h3p.parent.node, "span", recursive = TRUE)
@@ -88,7 +82,7 @@ getStreakResult <- function(h3p.node){
   p.var.name <- paste(str_replace_all(str_replace_all(xmlValue(h3p.node[[1]]), "\\W+", ""), " ", "_"), sep=".")
   p.var.name # get performance variable name
   
-  h3p.parent.node <- xmlParent(h3p.node) # get parent node of the current h3 node
+  h3p.parent.node <- xmlParent(h3p.node[[1]]) # get parent node of the current h3 node
   h3p.parent.node
   
   #game.nodes <- xmlElementsByTagName(h3p.parent.node, "span", recursive = TRUE)
@@ -106,3 +100,40 @@ getStreakResult <- function(h3p.node){
   p.fr
   return (p.fr)
 } # end of streak result function =====
+#======================================================================
+getStats <- function(club.id, club.season){
+  #============================================================================================
+  url.1 =paste("http://www.espnfc.us/club/barcelona/", club.id, 
+               "/statistics/performance?leagueId=all&season=", club.season, sep="")
+  
+  web_page_text <-getURLContent(url.1)
+  #web_page_text <- getURLContent("http://www.espn.com/college-football/team/stats/_/id/333/year/2007")
+  #print(attributes(web_page_text))
+  club.tree <- htmlTreeParse(web_page_text, useInternalNodes = TRUE, asText = TRUE, isHTML = TRUE)
+  #print(attributes(tree))
+  #print(club.tree)
+  #============== XPath =====select nodes anywhere in the document for the <div> tags==========
+  
+  club.divs <- xpathSApply(club.tree, "//div[@class='stat-score']") #, saveXML) #save node as strings
+  club.h3s <- xpathSApply(club.tree, "//h3") # get all h3 var names of interest
+  
+  #=========================attendance H3s ========================================
+  #===================== form all sttendance data.frame =====================
+  club.frame = data.frame(club.season)
+  names(club.frame) <- "Season"
+  club.frame
+  goal.index <- getAllGoalNodes(club.h3s)
+  for (i in goal.index)
+    club.frame <- cbind.data.frame(club.frame, getScoreResult(club.h3s[i]))
+  
+  streak.index <- getAllStreakNodes(club.h3s)
+  for (i in streak.index)
+    club.frame <- cbind.data.frame(club.frame, getStreakResult(club.h3s[i]))  
+  
+  att.index <- getAllAttendanceNodes(club.h3s)
+  for (i in att.index)
+    club.frame <- cbind.data.frame(club.frame, getAttendance(club.h3s[i]))
+  club.frame
+  #==================================form all Goal data.frame ========================================
+  return (club.frame)
+} #==================================
