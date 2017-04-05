@@ -2,10 +2,10 @@
 # Real Mardrid 86
 # AC Milan 103
 
-club.id = 103
+club.id = 6367
 
-club.season.most.recent = 2016
-club.season.most.past = 2001
+#club.season.most.recent = 2016
+#club.season.most.past = 2001
 
 
 getClubStats <- function(club.id){
@@ -26,4 +26,4 @@ return (club.stats)
 
 
 
-write.csv(getClubStats(club.id), file = paste("Club", club.id, "_2001_2016.csv", sep = ""))
+write.csv(getClubStats(club.id), file = paste("Bundesliga_", club.id, "_2001_2016.csv", sep = ""))
