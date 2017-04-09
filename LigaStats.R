@@ -2,7 +2,7 @@
 # Real Mardrid 86
 # AC Milan 103
 
-club.id = 6367
+club.id = 137
 
 #club.season.most.recent = 2016
 #club.season.most.past = 2001
@@ -27,3 +27,4 @@ return (club.stats)
 
 
 write.csv(getClubStats(club.id), file = paste("Bundesliga_", club.id, "_2001_2016.csv", sep = ""))
+
