@@ -1,0 +1,2 @@
+str(european_soccer_leagues)
+mean(european_soccer_leagues$MostHomeGoals)
