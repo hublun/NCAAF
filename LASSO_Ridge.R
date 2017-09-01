@@ -78,6 +78,8 @@ x.s.std = scale(x.s)
 y.s.std = scale(y.s)
 
 str(x.s)
+#==========Baseline OLS Regression Model ==========
+
 #========== LASSO =====
 fit.s = glmnet(x.s.std, y.s.std)
 
@@ -88,4 +90,5 @@ coef(fit.s, s=0.1)
 cvfit.s = cv.glmnet(x.s.std, y.s.std, alpha=1)
 plot(cvfit.s)
 cvfit.s$lambda.min
-coef(cvfit.s, s="lambda.min")
+coef(cvfit.s, s="lambda.1se")
+#==============================
