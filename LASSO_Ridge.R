@@ -74,12 +74,30 @@ x.s = as.matrix(european_soccer_leagues[,4:11])
 
 # normalize variables
 
-x.s.std = scale(x.s)
+x.s.std = scale(x.s, center = colMeans(x.s), scale=colMeans(x.s))
 y.s.std = scale(y.s)
 
 str(x.s)
 #==========Baseline OLS Regression Model ==========
+edf = european_soccer_leagues[,c(4:11,15)]
+m.edf = as.matrix(edf)
+s.edf = scale(m.edf, center=colMeans(m.edf), scale=colMeans(m.edf))
 
+df.edf = as.data.frame(s.edf)
+model = AggregatedAttendance ~ .
+fit = lm(model, data=df.edf)
+print(fit)
+coef(fit)
+anova(fit)
+influence(fit)
+confint(fit, level=0.95)
+summary(fit)
+#===========CV Regression Mopdel ===========
+cvols = cv.lm(data=df.edf, fit, m=5)
+summary(cvols)
+print(cvols)
+plot(cvols)
+attr(cvols, "ms")
 #========== LASSO =====
 fit.s = glmnet(x.s.std, y.s.std)
 
