@@ -81,7 +81,7 @@ str(x.s)
 #==========Baseline OLS Regression Model ==========
 edf = european_soccer_leagues[,c(4:11,15)]
 m.edf = as.matrix(edf)
-s.edf = scale(m.edf, center=colMeans(m.edf), scale=colMeans(m.edf))
+s.edf = scale(m.edf, center=colMeans(m.edf), scale=colMeans(m.edf)) # normalized matrix
 
 df.edf = as.data.frame(s.edf)
 model = AggregatedAttendance ~ .
@@ -92,21 +92,37 @@ anova(fit)
 influence(fit)
 confint(fit, level=0.95)
 summary(fit)
-#===========CV Regression Mopdel ===========
+
+# relative importance calcuation ====
+#linmod = lm(Fertility ~., data=swiss)
+
+metrics <- calc.relimp(linmod, type=c("pmvd"))
+
+metrics
+plot(metrics)
+#==CV Regression Mopdel ====
 cvols = cv.lm(data=df.edf, fit, m=5)
 summary(cvols)
 print(cvols)
 plot(cvols)
 attr(cvols, "ms")
 #========== LASSO =====
-fit.s = glmnet(x.s.std, y.s.std)
+y = s.edf[,9]
+x = s.edf[,1:8]
+
+y[1:4]
+x[1:4,1:8]
+
+fit.s = glmnet(x, y)
 
 plot(fit.s)
 print(fit.s)
 coef(fit.s, s=0.1)
 
-cvfit.s = cv.glmnet(x.s.std, y.s.std, alpha=1)
+cvfit.s = cv.glmnet(x, y, alpha=0.0)
 plot(cvfit.s)
 cvfit.s$lambda.min
-coef(cvfit.s, s="lambda.1se")
+coef(cvfit.s, s="lambda.min")
+summary(cvfit.s)
+print(cvfit.s)
 #==============================

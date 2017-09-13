@@ -1,0 +1,40 @@
+%% LyX 2.2.3 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
+
+\makeatother
+
+\usepackage{babel}
+\begin{document}
+\begin{tabular}{|l|c|l|l|l|}
+\hline 
+\multicolumn{1}{|c|}{Variable Name} & \multicolumn{1}{c|}{OLS} & CV-LASSO & CV-Elastic Net & CV-Ridge Regression\tabularnewline
+\hline 
+Most-Home-Goals & 0.16450 ({*}{*}{*}) & 0.149767 & 0.152582 & 0.159998\tabularnewline
+\hline 
+Most-Away-Goals & 0.02892 ({*}{*}{*}) & 0.019172 & 0.021713 & 0.039035\tabularnewline
+\hline 
+Largest-Margin-Victory & 0.23360 ({*}{*} )  & 0.247789 & 0.243875 & 0.222379\tabularnewline
+\hline 
+Largest-Margin-Defeat & 0.13900 (NS ) & 0.109325 & 0.112445 & 0.103353\tabularnewline
+\hline 
+Longest-Winning-Streak & 0.34600 ({*}{*}{*}) & 0.341520 & 0.339137 & 0.294571\tabularnewline
+\hline 
+Longest-Unbeaten-Streak & 0.13240 ({*}{*}{*}) & 0.125774 & 0.127188 & 0.131997\tabularnewline
+\hline 
+Longest-Losing-Streak & 0.00398 (NS) &  &  & -0.014556\tabularnewline
+\hline 
+Longest-Winless-Streak & -0.11430 ({*} )  & -0.105067 & -0.106393 & -0.106731\tabularnewline
+\hline 
+\multicolumn{1}{|r|}{Cross-Validation MSE} & \multicolumn{1}{c|}{0.291} & 0.290 & 0.277 & 0.291\tabularnewline
+\hline 
+\end{tabular}
+\end{document}
