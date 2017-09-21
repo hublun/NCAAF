@@ -79,11 +79,20 @@ y.s.std = scale(y.s)
 
 str(x.s)
 #==========Baseline OLS Regression Model ==========
-edf = european_soccer_leagues[,c(4:11,15)]
+ddf = european_soccer_leagues[,c(1:11,15)]
+
+ddf$League[ddf$League=='bundesliga'] = 'Bundesliga'
+
+counts <- table(ddf$League)
+barplot(counts, main='Data Distriburtion among Leagues', axis.lty = 1)
+
+
 m.edf = as.matrix(edf)
 s.edf = scale(m.edf, center=colMeans(m.edf), scale=colMeans(m.edf)) # normalized matrix
 
 df.edf = as.data.frame(s.edf)
+colnames(df.edf)[6] = "LUBS"
+
 model = AggregatedAttendance ~ .
 fit = lm(model, data=df.edf)
 print(fit)
@@ -99,6 +108,8 @@ summary(fit)
 metrics <- calc.relimp(fit, type=c("lmg"))
 
 metrics
+
+par(las=0)
 plot(metrics)
 
 
