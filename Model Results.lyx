@@ -131,7 +131,7 @@ CV-Ridge Regression
 \begin_inset Text
 
 \begin_layout Plain Layout
-Most-Home-Goals
+Most-Home-Goals (MHG)
 \end_layout
 
 \end_inset
@@ -178,7 +178,7 @@ Most-Home-Goals
 \begin_inset Text
 
 \begin_layout Plain Layout
-Most-Away-Goals
+Most-Away-Goals (MAG)
 \end_layout
 
 \end_inset
@@ -225,7 +225,7 @@ Most-Away-Goals
 \begin_inset Text
 
 \begin_layout Plain Layout
-Largest-Margin-Victory
+Largest-Margin-Victory (LMV)
 \end_layout
 
 \end_inset
@@ -272,7 +272,7 @@ Largest-Margin-Victory
 \begin_inset Text
 
 \begin_layout Plain Layout
-Largest-Margin-Defeat
+Largest-Margin-Defeat (LMD)
 \end_layout
 
 \end_inset
@@ -319,7 +319,7 @@ Largest-Margin-Defeat
 \begin_inset Text
 
 \begin_layout Plain Layout
-Longest-Winning-Streak
+Longest-Winning-Streak (LWS)
 \end_layout
 
 \end_inset
@@ -366,7 +366,7 @@ Longest-Winning-Streak
 \begin_inset Text
 
 \begin_layout Plain Layout
-Longest-Unbeaten-Streak
+Longest-Unbeaten-Streak (LUBS)
 \end_layout
 
 \end_inset
@@ -413,7 +413,7 @@ Longest-Unbeaten-Streak
 \begin_inset Text
 
 \begin_layout Plain Layout
-Longest-Losing-Streak
+Longest-Losing-Streak (LLS)
 \end_layout
 
 \end_inset
@@ -460,7 +460,7 @@ Longest-Losing-Streak
 \begin_inset Text
 
 \begin_layout Plain Layout
-Longest-Winless-Streak
+Longest-Winless-Streak (LDDS)
 \end_layout
 
 \end_inset
@@ -503,7 +503,7 @@ Longest-Winless-Streak
 </cell>
 </row>
 <row>
-<cell multicolumn="1" alignment="right" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+<cell multicolumn="1" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout

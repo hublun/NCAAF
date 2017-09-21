@@ -96,10 +96,12 @@ summary(fit)
 # relative importance calcuation ====
 #linmod = lm(Fertility ~., data=swiss)
 
-metrics <- calc.relimp(linmod, type=c("pmvd"))
+metrics <- calc.relimp(fit, type=c("lmg"))
 
 metrics
 plot(metrics)
+
+
 #==CV Regression Mopdel ====
 cvols = cv.lm(data=df.edf, fit, m=5)
 summary(cvols)
