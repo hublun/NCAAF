@@ -22,7 +22,7 @@ plot(bn.hc)
 
 bn.ab = gs(learning.test, blacklist = c("B", "A"))
 plot(bn.ab)
-
+modelstring(bn.ab) # relationships among nodes
 
 
 
