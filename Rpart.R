@@ -18,13 +18,15 @@ dev.off()
 str(learning.test)
 bn.hc <- hc(learning.test, score = "aic")
 bn.hc
+arcs(bn.hc) # display edges in a Graph object - Baysian Network object
 plot(bn.hc)
 
-bn.ab = gs(learning.test, blacklist = c("B", "A"))
+bn.ab = gs(learning.test, blacklist = bl2)
 plot(bn.ab)
 modelstring(bn.ab) # relationships among nodes
-
-
+#== blacklisting with dataframe and matrix ================
+bl1 <- data.frame(from=c("A", "B"), to=c("B", "E"))
+bl2 <- matrix(c("A", "B", "B", "C"), ncol = 2, byrow = TRUE, dimnames = list(NULL, c("from", "to")))
 
 #============== Learning Soccer Network ============
 bn.soc <- hc(df.edf)
