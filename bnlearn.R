@@ -2,7 +2,7 @@
 write.csv(df.edf, file = "SAS_File.csv")
 #============================= Regression Tree =============================
 tree.att <- rpart(AggregatedAttendance~., data=df.edf, method="anova", xval=5)
-printcp(tree.att)
+printcp(tree.att) 
 text(tree.att)
 plot(tree.att)
 rsq.rpart(tree.att)
@@ -52,7 +52,7 @@ bn.soc <- hc(df.edf.tie)
 bn.soc
 plot(bn.soc)
 
-modelstring(bn.soc)
+modelstring(bn.soc) #read modelstring
 
 #========= building a network from model string ===================
 
