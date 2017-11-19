@@ -44,4 +44,27 @@ HairFreq = apply(HairEyeColor, c("Hair"), sum) # sum across eye sex
 HairProp = HairFreq / sum(HairFreq)
 HairProp
 EyehairProp["Brown",] / EyeProp["Brown"] # conditional probability of hair color given eye color
-#================= 
+#================= Bimodal Distribution ===================
+Theta = seq(0, 1, length=1000)
+Theta
+rep(1,200)
+pTheta = c(rep(1,200), seq(1,100, length=50), seq(100,1,length=50), rep(1,200), rep(1,200),
+           seq(1,100, length=50), seq(100,1,length=50), rep(1,200))
+pTheta = pTheta/sum(pTheta) # normalizing prior distribution
+source(file.choose())
+Data =c(rep(0,88), rep(1,99))
+posterior = BernGrid(Theta, pTheta, Data, plotType = "Bars", showCentTend = "None",showHDI = FALSE, showpD = FALSE )
+#==================
+source(file.choose())
+t = 0.75 # prior mode
+n = 25 # prior effective sample size
+a = t*(n-2)+1
+b = (1-t)*(n-2)+1
+Prior = c(a,b) # Prior as vector of two shape parameters
+N = 20
+z=17
+Data=c(rep(0, N-z), rep(1, z))
+openGraph(width = 5, height = 7)
+posterior = BernBeta(priorBetaAB = Prior, Data = Data, plotType = "Bars", showCentTend = "Mode", showHDI = TRUE, showpD = FALSE)
+saveGraph(file="BernBeta Example", type="jpg")
+#====================== end of chapter 6 ============
