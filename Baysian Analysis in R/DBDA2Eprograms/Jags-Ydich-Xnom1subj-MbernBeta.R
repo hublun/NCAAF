@@ -10,7 +10,7 @@ genMCMC = function( data , numSavedSteps=50000 , saveName=NULL ) {
   #-----------------------------------------------------------------------------
   # THE DATA.
   if ( class(data)=="data.frame" ) {  # If data is a data.frame
-    y = myData$y                      # then pull out the column named y
+    y = data$y                      # then pull out the column named y
   } else {                            # else
     y = data                          # rename the data as y.
   }

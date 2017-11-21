@@ -68,3 +68,44 @@ openGraph(width = 5, height = 7)
 posterior = BernBeta(priorBetaAB = Prior, Data = Data, plotType = "Bars", showCentTend = "Mode", showHDI = TRUE, showpD = FALSE)
 saveGraph(file="BernBeta Example", type="jpg")
 #====================== end of chapter 6 ============
+#============= JAGS Ch 8 ============================
+MyData = read.csv(file.choose())
+y = MyData$y
+Ntotal = length(y)
+dataList = list(y=y, Ntotal = Ntotal)
+
+modelString = "
+model {
+  for (i in 1:Ntotal){
+    y[i]~dbern(theta) # likelihood
+  }
+  theta ~ dbeta(1,1) #prior
+}"
+writeLines(modelString, con = "TEMPmodel.txt")
+
+ 
+
+initsList = function(){
+  resampledY = sample(y, replace = TRUE)
+  thetaInit = sum(resampledY) / length(resampledY) #MLE extimate of bernoulli
+  thetaInit = 0.001 + 0.998*thetaInit
+  return (list(theta = thetaInit))
+}
+
+jagsModel = jags.model(file = "TEMPmodel.txt", data=dataList, inits = initsList, 
+           n.chains = 3, n.adapt = 500)
+update(jagsModel, n.iter = 500)
+coda.Samples = coda.samples(jagsModel, variable.names = c("theta"), n.iter = 3334)
+
+source(file.choose())
+
+diagMCMC(codaObject = coda.Samples, parName = "theta")
+plotPost(coda.Samples[,"theta"], main = "Theta", xlab=bquote(theta), cenTend = "median", xlim=c(0.1,0.4),
+         compVal = 0.5, ROPE = c(0.45,0.55), credMass = 0.90, showCurve = FALSE, border = "green")
+#============= p. 207 210 ==============================
+mcmcCoda = genMCMC(data = MyData, numSavedSteps = 10000)
+diagMCMC(mcmcCoda, parName = "theta[2]")
+smryMCMC(mcmcCoda, compVal = NULL, compValDiff = 0.0)
+plotMCMC(mcmcCoda, data=MyData, compVal = NULL, compValDiff = 0.0)
+#================ p. 210 ===========================
+detectCores()
