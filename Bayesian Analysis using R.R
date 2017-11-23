@@ -103,9 +103,9 @@ diagMCMC(codaObject = coda.Samples, parName = "theta")
 plotPost(coda.Samples[,"theta"], main = "Theta", xlab=bquote(theta), cenTend = "median", xlim=c(0.1,0.4),
          compVal = 0.5, ROPE = c(0.45,0.55), credMass = 0.90, showCurve = FALSE, border = "green")
 #============= p. 207 210 ==============================
-mcmcCoda = genMCMC(data = MyData, numSavedSteps = 10000)
-diagMCMC(mcmcCoda, parName = "theta[2]")
-smryMCMC(mcmcCoda, compVal = NULL, compValDiff = 0.0)
-plotMCMC(mcmcCoda, data=MyData, compVal = NULL, compValDiff = 0.0)
+mcmcCoda = genMCMC(data = MyData, sName ="s", yName = "y", numSavedSteps = 20000, thinSteps = 10)
+diagMCMC(mcmcCoda, parName = "theta[1]")
+smryMCMC(mcmcCoda, compVal = 0.5, diffIdVec = c(1, 14, 28), compValDiff = 0.0)
+plotMCMC(mcmcCoda, data=MyData, sName ="s", yName = "y",compVal = 0.5, diffIdVec = c(1, 14, 28), compValDiff = 0.0)
 #================ p. 210 ===========================
 detectCores()
