@@ -109,3 +109,16 @@ smryMCMC(mcmcCoda, compVal = 0.5, diffIdVec = c(1, 14, 28), compValDiff = 0.0)
 plotMCMC(mcmcCoda, data=MyData, sName ="s", yName = "y",compVal = 0.5, diffIdVec = c(1, 14, 28), compValDiff = 0.0)
 #================ p. 210 ===========================
 detectCores()
+#===================== Baseball ===================
+graphics.off() # This closes all of R's graphics windows.
+pwd()
+#rm(list=ls())  # Careful! This clears all of R's memory!
+WD <- getwd()
+tWD = paste(WD,"/Baysian Analysis in R/DBDA2Eprograms", sep = "")
+setwd(tWD)
+# read data and source function files ==\
+mcmcCoda = genMCMC(data = MyData, sName ="Player", NName = "AtBats", zName = "Hits",cName = "PriPos",  numSavedSteps = 11000, thinSteps = 20)
+parameterNames = varnames(mcmcCoda)
+for (parName in c("omega[1]", "omegaO", "kappa[1]", "kappaO", "theta[1]")){
+  diagMCMC(codaObject =  mcmcCoda, parName = parName, saveName = fileNameRoot, saveType = graphFileType)
+}
