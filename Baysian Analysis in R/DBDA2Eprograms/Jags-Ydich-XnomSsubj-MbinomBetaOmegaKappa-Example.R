@@ -2,7 +2,11 @@
 #------------------------------------------------------------------------------- 
 # Optional generic preliminaries:
 graphics.off() # This closes all of R's graphics windows.
+pwd()
 rm(list=ls())  # Careful! This clears all of R's memory!
+WD <- getwd()
+tWD = paste(WD,"/Baysian Analysis in R/DBDA2Eprograms", sep = "")
+setwd(tWD)
 #------------------------------------------------------------------------------- 
 # Load The data 
 myData = read.csv("TherapeuticTouchData.csv")
