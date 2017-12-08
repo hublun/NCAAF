@@ -156,4 +156,20 @@ Keywords methodology, motivated reasoning, publication, disclosure},
   publisher = {{SAGE} Publications},
 }
 
+@Article{Wicherts2017,
+  author    = {Jelte Wicherts},
+  title     = {The Weak Spots in Contemporary Science (and How to Fix Them)},
+  journal   = {Animals},
+  year      = {2017},
+  volume    = {7},
+  number    = {12},
+  pages     = {90},
+  month     = {nov},
+  abstract  = {Simple Summary: Several fraud cases, widespread failure to replicate or reproduce seminal findings, and pervasive error in the scientific literature have led to a crisis of confidence in the biomedical, behavioral, and social sciences. In this review, the author discusses some of the core findings that point at weak spots in contemporary science and considers the human factors that underlie them. He delves into the human tendencies that create errors and biases in data collection, analyses, and reporting of research results. He presents several solutions to deal with observer bias, publication bias, the researcher’s tendency to exploit degrees of freedom in their analysis of data, low statistical power, and errors in the reporting of results, with a focus on the specific challenges in animal welfare research.
+Abstract: In this review, the author discusses several of the weak spots in contemporary science, including scientific misconduct, the problems of post hoc hypothesizing (HARKing), outcome switching, theoretical bloopers in formulating research questions and hypotheses, selective reading of the literature, selective citing of previous results, improper blinding and other design failures, p-hacking or researchers’ tendency to analyze data in many different ways to find positive (typically significant) results, errors and biases in the reporting of results, and publication bias. The author presents some empirical results highlighting problems that lower the trustworthiness of reported results in scientific literatures, including that of animal welfare studies. Some of the underlying causes of these biases are discussed based on the notion that researchers are only human and hence are not immune to confirmation bias, hindsight bias, and minor ethical transgressions. The author discusses solutions in the form of enhanced transparency, sharing of data and materials, (post-publication) peer review, pre-registration, registered reports, improved training, reporting guidelines, replication, dealing with publication bias, alternative inferential techniques, power, and other statistical tools.
+Keywords: reproducibility; replicability; validity; questionable research practices; meta-research},
+  doi       = {10.3390/ani7120090},
+  publisher = {{MDPI} {AG}},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}

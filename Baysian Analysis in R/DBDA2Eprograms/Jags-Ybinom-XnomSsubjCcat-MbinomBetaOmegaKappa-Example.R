@@ -51,3 +51,5 @@ plotMCMC( mcmcCoda , data=myData ,
           compValDiff=0.0, #ropeDiff = c(-0.05,0.05) ,
           saveName=fileNameRoot , saveType=graphFileType )
 #------------------------------------------------------------------------------- 
+rstan_options(auto_write = TRUE)
+options(mc.cores = parallel::detectCores())
