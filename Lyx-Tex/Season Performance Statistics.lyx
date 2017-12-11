@@ -1,0 +1,135 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+Below, we define the eight season-long performance statiscs using the 2015/16
+ La Liga season of Real Madrid C.F.
+ as an example.
+\end_layout
+
+\begin_layout Itemize
+Most Home Goals (MHG) = maximum goals scored in a single match played at
+ home.
+ For the season 2015/2016, Real Madrid’s MHG is 10.
+ They beat Rayo Vallecano by 10-2 at Santiago Bernabéu Stadium on 12/20/2015.
+\end_layout
+
+\begin_layout Itemize
+Most Away Goals (MAG) = maximum goals scored in a single away match.
+ For the season 2015/2016, Real Madrid’s MAG is 6.
+ They defeated Espanyol 6-0 on 9/12/2015 at RCDE stadium.
+\end_layout
+
+\begin_layout Itemize
+Largest Margin of Victory (LMV) = the largest difference betweem the number
+ of goals scored and the number of goals surrendered by the winning team
+ in a single Liga regular season match.
+ Real Madrid achieved a LMV of 8, when they won against Rayo Vallecano 10-2
+ on 12/20/2015.
+\end_layout
+
+\begin_layout Itemize
+Largest Margin of Defeat (LMD) = the largest difference betweem the number
+ of goals surrendered and the number of goals scored by the losing team
+ in a single Liga regular season match.
+ Teal MAdrid's 2015/16 LMD is 4, when they lost to Barcelona for Real Madrid
+ 0-4 on 11/21/2015.
+\end_layout
+
+\begin_layout Itemize
+Longest Winning Streak (LWS) = the maximum number of wins in succession,
+ or the maximum number of wins in a row.
+ For the 2015/2016 season, Real Madrid enjoyed a LWS of 12 games between
+ 3/2/2016 and 5/14/2016.
+\end_layout
+
+\begin_layout Itemize
+Longest Unbeaten Streak (LUBS) = the maximum number of matches in succession
+ played without being defeated (win or draw).
+ Between 3/2/2016 and 5/14/2016, Real Madrid played 12 La Liga matches without
+ suffering a single loss.
+\end_layout
+
+\begin_layout Itemize
+Longest Losing Streak (LLS) = longest series of losses by a team.
+ Real Madrid is considered one of the best teams in La Liga and in the world,
+ evident from their LLS being only 2 games between 11/8/2015 and 11/21/2015.
+\end_layout
+
+\begin_layout Itemize
+Longest Winless Streak = most matches without a win, their either draw or
+ loose, Real Madrid had a winless streak of only 2 games in the same season.
+ 
+\end_layout
+
+\end_body
+\end_document

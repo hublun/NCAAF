@@ -1,0 +1,318 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Author template for Interfaces (inte)
+%% Mirko Janc, Ph.D., INFORMS, mirko.janc@informs.org
+%% ver. 0.95, December 2010
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\documentclass[inte,blindrev]{informs3}
+\documentclass[inte,nonblindrev]{informs3} % current default for manuscript submission
+
+%%\OneAndAHalfSpacedXI
+\OneAndAHalfSpacedXII % Current default line spacing
+%%\DoubleSpacedXII
+%%\DoubleSpacedXI
+
+% If hyperref is used, dvi-to-ps driver of choice must be declared as
+%   an additional option to the \documentclass. For example
+%\documentclass[dvips,inte]{informs3}      % if dvips is used
+%\documentclass[dvipsone,inte]{informs3}   % if dvipsone is used, etc.
+
+% Private macros here (check that there is no clash with the style)
+
+% Natbib setup for author-year style
+\usepackage{natbib}
+ \bibpunct[, ]{(}{)}{,}{a}{}{,}%
+ \def\bibfont{\small}%
+ \def\bibsep{\smallskipamount}%
+ \def\bibhang{24pt}%
+ \def\newblock{\ }%
+ \def\BIBand{and}%
+
+%% Setup of theorem styles. Outcomment only one. 
+%% Preferred default is the first option.
+\TheoremsNumberedThrough     % Preferred (Theorem 1, Lemma 1, Theorem 2)
+%\TheoremsNumberedByChapter  % (Theorem 1.1, Lema 1.1, Theorem 1.2)
+
+%% Setup of the equation numbering system. Outcomment only one.
+%% Preferred default is the first option.
+\EquationsNumberedThrough    % Default: (1), (2), ...
+%\EquationsNumberedBySection % (1.1), (1.2), ...
+
+% In the reviewing and copyediting stage enter the manuscript number.
+%\MANUSCRIPTNO{} % When the article is logged in and DOI assigned to it,
+                 %   this manuscript number is no longer necessary
+
+\setcounter{secnumdepth}{0}% "Interfaces" does not number sections
+
+%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%
+
+% Outcomment only when entries are known. Otherwise leave as is and 
+%   default values will be used.
+%\setcounter{page}{1}
+%\VOLUME{00}%
+%\NO{0}%
+%\MONTH{Xxxxx}% (month or a similar seasonal id)
+%\YEAR{0000}% e.g., 2005
+%\FIRSTPAGE{000}%
+%\LASTPAGE{000}%
+%\SHORTYEAR{00}% shortened year (two-digit)
+%\ISSUE{0000} %
+%\LONGFIRSTPAGE{0001} %
+%\DOI{10.1287/xxxx.0000.0000}%
+
+% Author's names for the running heads
+% Sample depending on the number of authors;
+\RUNAUTHOR{Duan}
+% \RUNAUTHOR{Jones and Wilson}
+% \RUNAUTHOR{Jones, Miller, and Wilson}
+% \RUNAUTHOR{Jones et al.} % for four or more authors
+% Enter authors following the given pattern:
+%\RUNAUTHOR{}
+
+% Title or shortened title suitable for running heads. Sample:
+\RUNTITLE{Season Performance and Aggregated Attendance}
+% Enter the (shortened) title:
+%\RUNTITLE{}
+
+% Full title. Sample:
+\TITLE{Bayesian Learning from Top European Professional Soccer Leagues about Attendance Influencers: An Examination at the Season Level}
+% Enter the full title:
+%\TITLE{}
+
+% Block of authors and their affiliations starts here:
+% NOTE: Authors with same affiliation, if the order of authors allows, 
+%   should be entered in ONE field, separated by a comma. 
+%   \EMAIL field can be repeated if more than one author
+\ARTICLEAUTHORS{%
+\AUTHOR{C.J. (Chaojie) Duan}
+\AFF{Troy University, \EMAIL{cjduan@outlook.com}}
+\AUTHOR{Ananyo Chakravarty}
+\AFF{Troy University, \EMAIL{achakravarty@troy.edu}}
+% Enter all authors
+} % end of the block
+
+\ABSTRACT{%
+We collected season-long performance data via data scraping from the ESPN FC website.% Enter your abstract
+}%
+
+% Sample 
+%\KEYWORDS{deterministic inventory theory; infinite linear programming duality; 
+%  existence of optimal policies; semi-Markov decision process; cyclic schedule}
+%\HISTORY{This article was reviewed} % for example
+
+% Fill in data. If unknown, or unnecessary, outcomment the field
+\KEYWORDS{European Professional Soccer Leagues, Machine Learning, Frequentist Statistics, Bayesian Inference, Aggregated Attendance, Bayesian Network}
+%\HISTORY{}
+
+\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Samples of sectioning (and labeling) in INTE
+% NOTE: (1) \section and \subsection do NOT end with a period
+%       (2) \subsubsection and lower need end punctuation
+%       (3) capitalization is as shown (title style).
+%
+%\section{Introduction.}\label{intro} %%1.
+%\subsection{Duality and the Classical EOQ Problem.}\label{class-EOQ} %% 1.1.
+%\subsection{Outline.}\label{outline1} %% 1.2.
+%\subsubsection{Cyclic Schedules for the General Deterministic SMDP.}
+%  \label{cyclic-schedules} %% 1.2.1
+%\section{Problem Description.}\label{problemdescription} %% 2.
+
+% Text of your paper here
+
+\section{Introduction}
+
+The popular frequentist statistical inference process starts with the formulation of an alternative research hypothesis(Ha), such as "people with higher income live happier than low income earners", which is typically set up against a null non-effect hypothesis (Ho), such as ``income level has no effect on happiness". Then researchers collect relevant data (each subject's perceived happiness and income), and conduct a statistical significance test (t test) to see how likely such results would hold if chance (noise) alone were at work (testing against the null hypothesis). The illustrated example of the popular null-hypothesis significance test (NHST) will eventually compare the p value associated with our sample test statistic against the golden standard of 0.05 as the threshold for significance. 
+
+``p value is influenced both by effect size and by sample size"\citep[pp. 787]{wagenmakers2007practical}
+For this reason, sooner or later, you are guaranteed to get a significant result if you run subjects long enough and stop when you get the p value you want [Wagenmakers, 2007].
+
+``facility to sample from the prior or posterior is a very informative feature of the Bayesian paradigm''\cite{tipping2004bayesian}
+``The Bayes factor pits one theory against another—for example, Theory1 against Theory2."\citep[p. 277]{dienes2011bayesian}
+``Typically, this means one should use a power calculation to plan in advance how many subjects to run. Running subjects until a significant result is obtained is forbidden, because this will always succeed,  given sufficient time, even if the null is true"\citep[p. 278]{dienes2011bayesian}
+
+``the goal of Bayesian statistics is to represent prior uncertainty about model parameters with a probability distribution and to update this prior uncertainty with current data to produce a posterior probability distribution for the parameter that contains less uncertainty"\citep[p. 50]{lynch2007introduction}
+
+``The problem of knowing the sampling plan is even more prominent when NHST is applied to data that present themselves in the real
+world (e.g., court cases or economic and social phenomena), for which no experimenter was present to guide the data collection process."\citep[pp. 784]{wagenmakers2007practical}
+
+``in the NHST framework, every null hypothesis that is not exactly true will eventually be rejected as the number of observations grows large. Much less appreciated is the fact that, even when a null hypothesis is exactly true, it can always be rejected, at any desired significance level that is greater than 0 (e.g., α 5 .05 or α 5 .00001). The method to achieve this is to calculate a p value after every new observation or set of observations comes in, and to stop the experiment as soon as the p value first drops below α.\citep[pp. 784]{wagenmakers2007practical} 
+
+Turing award winner Jim Gray imagined data science as a "fourth paradigm" of science (empirical, theoretical, computational and now data-driven) and asserted that "everything about science is changing because of the impact of information technology" and the data deluge.\citep{bell2009beyond, hey2009fourth}
+\section*{Context and Data}
+\subsection*{Soccer Ststistics}
+According to ESPN FC(www.espnfc.us), eight season-long performance metrics are used to characterize a professional soccer team's regular league season. Below, we define those statistics using the 2015/16 La Liga season of Real Madrid C.F. as an example.
+\begin{itemize}
+\item Most Home Goals (MHG) = maximum goals scored in a single match played at home. For the season 2015/2016, Real Madrid’s MHG is 10. They beat Rayo Vallecano by 10-2 at Santiago Bernabéu Stadium on 12/20/2015.
+\item Most Away Goals (MAG) = maximum goals scored in a single away match. For the season 2015/2016, Real Madrid’s MAG is 6. They defeated Espanyol 6-0 on 9/12/2015 at RCDE stadium.
+\item Largest Margin of Victory (LMV) = the largest difference betweem the number of goals scored and the number of goals surrendered by the winning team in a single Liga regular season match. Real Madrid achieved a LMV of 8, when they won against Rayo Vallecano 10-2 on 12/20/2015.
+\item Largest Margin of Defeat (LMD) = the largest difference betweem the number of goals surrendered and the number of goals scored by the losing team in a single Liga regular season match. Real Madrid's 2015/16 LMD is 4, when they lost to Barcelona 0-4 on 11/21/2015.
+\item Longest Winning Streak (LWS) = the maximum number of wins in succession, or the maximum number of wins in a row. For the 2015/2016 season, Real Madrid enjoyed a LWS of 12 games between 3/2/2016 and 5/14/2016.
+\item Longest Unbeaten Streak (LUBS) = the maximum number of matches in succession played without being defeated (win or draw). Between 3/2/2016 and 5/14/2016, Real Madrid played 12 La Liga matches without suffering a single loss.
+\item Longest Losing Streak (LLS) = longest series of losses by a team. Real Madrid is considered one of the best teams in La Liga and in the world, evident from their LLS being only 2 games between 11/8/2015 and 11/21/2015.
+\item Longest Winless Streak = most matches without a win, their either draw or loose, Real Madrid had a winless streak of only 2 games in the same season.
+\end{itemize} 
+
+
+\subsection*{Data Source}
+The statistics we use in the present paper are freely available to the public; we develop our own R-based data scraper (program) and use it to extract our data from the website ESPN FC. Our data set covers all of the Big Five (EPL, La Liga, Bundesliga, Leagure 1, Serie A) and spans from seasons 2001/2 - 2015/16. in addition to the eight performance metrics we defined in earlier section, we also collect our response values of aggregated attendance for each team-season unit.   
+\subsection*{Summary Statistics}
+
+table\ref{des}
+%==========================================Summary Statistics ====================================
+\begin{table}[!ht]
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline 
+ & Mean & Median & Std. Dev. & Min. & Max. & Interquartile Range \tabularnewline
+\hline 
+\hline 
+MHG & 3.634 & 4 & 1.676 & 0 & 9 & 2\tabularnewline
+\hline 
+MAG & 2.884 & 3 & 1.676 & 0 & 10 & 2\tabularnewline
+\hline 
+LMV & 4.319 & 4 & 1.409 & 1 & 10 & 2\tabularnewline
+\hline 
+LMD & 3.588 & 3 & 1.186 & 1 & 8 & 1\tabularnewline
+\hline 
+LWS & 4.303 & 4 & 2.254 & 1 & 22 & 2\tabularnewline
+\hline 
+LUBS & 8.844 & 8 & 5.213 & 2 & 45 & 6\tabularnewline
+\hline 
+LLS & 2.881 & 3 & 1.283 & 1 & 13 & 2\tabularnewline
+\hline 
+LDDS & 5.578 & 5 & 2.741 & 1 & 21 & 3\tabularnewline
+\hline 
+AATT & 705808.736 & 608990.5 & 451624.726 & 4048 & 2477095 & 528828\tabularnewline
+\hline 
+\end{tabular}
+\caption{Descriptive Statistics}\label{des}
+\end{table}
+%============================= Correlation Matrix=================================================
+\begin{table}[!ht]
+\begin{tabular}{|l|r@{\extracolsep{0pt}.}l|r@{\extracolsep{0pt}.}l|r@{\extracolsep{0pt}.}l|r@{\extracolsep{0pt}.}l|r@{\extracolsep{0pt}.}l|r@{\extracolsep{0pt}.}l|r@{\extracolsep{0pt}.}l|r@{\extracolsep{0pt}.}l|r@{\extracolsep{0pt}.}l|}
+\hline 
+ & \multicolumn{2}{c|}{LLS} & \multicolumn{2}{c|}{LMD} & \multicolumn{2}{c|}{LMV} & \multicolumn{2}{c|}{LUBS} & \multicolumn{2}{c|}{LWLSS} & \multicolumn{2}{c|}{LWS} & \multicolumn{2}{c|}{MAG} & \multicolumn{2}{c|}{MHG} & \multicolumn{2}{c|}{AATT}\tabularnewline
+\hline 
+\hline 
+LLS & 1&000 & 0&308 & -0&255 & -0&412 & 0&539 & -0&379  & -0&172 & -0&274 & -0&247\tabularnewline
+\hline 
+LMD & 0&308 & 1&000 & -0&222 & -0&347 & 0&296 & -0&292 & -0&168 & -0&207 & -0&134\tabularnewline
+\hline 
+LMV & -0&255 & -0&222 & 1&000 & 0&415 & -0&396 & 0&436 & 0&558 & 0&768 & 0&417\tabularnewline
+\hline 
+LUBS & -0&412 & -0&347 & 0&415 & 1&000 & -0&452 & 0&612 & 0&314 & 0&362 & 0&409\tabularnewline
+\hline 
+LWLSS & 0&539 & 0&296 & -0&396 & -0&452 & 1&000 & -0&416 & -0&279 & -0&355 & -0&335\tabularnewline
+\hline 
+LWS & -0&379 & -0&292 & 0&435 & 0&612 & -0&416 & 1&000 & 0&336 & 0&382 & 0&478\tabularnewline
+\hline 
+MAG & -0&172 & -0&168 & 0&558 & 0&314 & -0&279 & 0&336 & 1&000 & 0&185 & 0&260\tabularnewline
+\hline 
+MHG & -0&274 & -0&207 & 0&768 & 0&362 & -0&355 & 0&382 & 0&185 & 1&000 & 0&383\tabularnewline
+\hline 
+AATT & -0&247 & -0&134 & 0&417 & 0&409 & -0&335 & 0&478 & 0&260 & 0&383 & 1&000\tabularnewline
+\hline 
+\multicolumn{19}{|l|}{{*}{*}{*} all coefficients are significant at the p value of 0.001 level}\tabularnewline
+\hline 
+\end{tabular}
+\caption{Correlation Matrix}\label{corr}
+\end{table}
+%==============table of model results ===============
+\begin{table}[!htbp]
+\begin{tabular}{|l|c|c|c|c|}
+\hline 
+\multicolumn{1}{|c|}{Variable Name} & \multicolumn{1}{c|}{OLS} & CV-LASSO & CV-Elastic Net & CV-Ridge Regression\tabularnewline
+\hline 
+MHG & 0.165 ({*}{*}{*}) & 0.149 & 0.152 & 0.159\tabularnewline
+\hline 
+MAG & 0.029 ({*}{*}{*}) & 0.019 & 0.021 & 0.039\tabularnewline
+\hline 
+LMV & 0.234 ({*}{*} )  & 0.247 & 0.243 & 0.222\tabularnewline
+\hline 
+LMD & 0.139 (NS ) & 0.109 & 0.112 & 0.103\tabularnewline
+\hline 
+LWS & 0.346 ({*}{*}{*}) & 0.341 & 0.339 & 0.294\tabularnewline
+\hline 
+LUBS & 0.132 ({*}{*}{*}) & 0.125 & 0.127 & 0.131\tabularnewline
+\hline 
+LLS & 0.004 (NS) &  &  & -0.014\tabularnewline
+\hline 
+LDDS & -0.114 ({*} )  & -0.105 & -0.106 & -0.106\tabularnewline
+\hline 
+\multicolumn{1}{|c|}{CV-MSE} & \multicolumn{1}{c|}{0.291} & 0.290 & 0.277 & 0.291\tabularnewline
+\hline 
+\end{tabular}
+\caption{Model Results}
+\end{table}
+
+
+%====================================================
+% Acknowledgments here
+\ACKNOWLEDGMENT{%
+% Enter the text of acknowledgments here
+}% Leave this (end of acknowledgment)
+
+%========================
+\begin{figure}[!ht]
+\centering\includegraphics[width=1.0\textwidth]{Figure1.pdf}
+\caption{\textit{Revenue of the top European soccer leagues (Big Five*) from 2006/07 to 2016/17 (in billion euros)}}
+\end{figure}
+
+\begin{figure}[!ht]
+\centering\includegraphics[width=1.0\textwidth]{Figure2.pdf}
+\caption{\textit{Average per Game Attendance of the Biggest European Soccer Leagues from 96/97 t0 2015/16 (in thousands) }}
+\end{figure}
+
+\begin{figure}[!ht]
+\centering\includegraphics[height = 1.0\textheight, width = 1.0\textwidth]{Figure3.pdf}
+\caption{\textit{Most Valuable Soccer Brands in 2017 (in million U.S. \$)}}
+\end{figure}
+
+\begin{figure}[!ht]
+\centering\includegraphics[height = 0.5\textheight, width = 0.6\textwidth]{Figure4.pdf}
+\caption{\textit{Club-Seasons by League}}
+\end{figure}
+
+\begin{figure}[!ht]
+\centering\includegraphics[height = 0.5\textheight, width = 0.6\textwidth]{Figure5.pdf}
+\caption{\textit{Relative Importance by Team Performance Metrics}}\label{Rel}
+\end{figure}
+
+\begin{figure}[!ht]
+\centering\includegraphics[height = 0.5\textheight, width = 0.6\textwidth]{Figure6.pdf}
+\caption{\textit{Bayesian Network Graphical Model}}\label{Bayes}
+\end{figure}
+%=========================
+
+% Appendix here
+% Options are (1) APPENDIX (with or without general title) or 
+%             (2) APPENDICES (if it has more than one unrelated sections)
+% Outcomment the appropriate case if necessary
+%
+% \begin{APPENDIX}{<Title of the Appendix>}
+% \end{APPENDIX}
+%
+%   or 
+%
+% \begin{APPENDICES}
+% \section{<Title of Section A>}
+% \section{<Title of Section B>}
+% etc
+% \end{APPENDICES}
+
+
+% References here (outcomment the appropriate case) 
+
+% CASE 1: BiBTeX used to constantly update the references 
+%   (while the paper is being written).
+\bibliographystyle{informs2014} % outcomment this and next line in Case 1
+\bibliography{Soccer_Interfaces.bib} % if more than one, comma separated
+
+% CASE 2: BiBTeX used to generate mypaper.bbl (to be further fine tuned)
+%\input{mypaper.bbl} % outcomment this line in Case 2
+
+\end{document}
+
+
