@@ -172,4 +172,15 @@ Keywords: reproducibility; replicability; validity; questionable research practi
   publisher = {{MDPI} {AG}},
 }
 
+@Article{Carpenter2017,
+  author    = {Bob Carpenter and Andrew Gelman and Matthew D. Hoffman and Daniel Lee and Ben Goodrich and Michael Betancourt and Marcus Brubaker and Jiqiang Guo and Peter Li and Allen Riddell},
+  title     = {Stan: A Probabilistic Programming Language},
+  journal   = {Journal of Statistical Software},
+  year      = {2017},
+  volume    = {76},
+  number    = {1},
+  doi       = {10.18637/jss.v076.i01},
+  publisher = {Foundation for Open Access Statistic},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}
