@@ -1,0 +1,6 @@
+model {
+for (i in 1:Nt){
+y[i]~dpois(mu) # likelihood distribution
+}
+mu ~ dbeta(1,1) #prior distribution
+}

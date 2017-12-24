@@ -81,6 +81,8 @@ model {
   }
   theta ~ dbeta(1,1) #prior
 }"
+
+
 writeLines(modelString, con = "TEMPmodel.txt")
 
  

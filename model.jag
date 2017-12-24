@@ -1,0 +1,10 @@
+model {
+for (i in 1:Nt){
+  y1[i]~dpois(mu1) # likelihood distribution
+  y2[i]~dpois(mu2)
+}
+mu1 ~ dunif(0,20) #prior distribution for mu1
+mu2 ~ dunif(0,20) #prior distribution for mu2
+
+mud = mu1 - mu2
+}

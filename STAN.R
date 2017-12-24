@@ -1,33 +1,80 @@
+#================= paralell computing multiple core =========
 rstan_options(auto_write = TRUE)
 options(mc.cores = parallel::detectCores())
+#============================================================
 
+modelPoisson ="
 
-modelString ="
 data{
   int<lower=0> N; // lower bound is 0
-  int y[N];
+  int y1[N]; 
+  int y2[N];
 }
 
 parameters {
-  real<lower=0, upper=1> theta;
+  real<lower=0> lambda1;
+  real<lower=0> lambda2;
+}
+
+transformed parameters{
+
+  real delta;
+  delta = lambda1 - lambda2;
 }
 
 model{
-  theta ~ beta(1,1);
-  y ~ bernoulli(theta); 
+  lambda1 ~ uniform(0,20);
+  lambda2 ~ uniform(0,20);
+  y1 ~ poisson(lambda1);
+  y2 ~ poisson(lambda2);
+}"
+#-------------------------------------
+modelGaussian ="
+
+data{
+  int<lower=0> N; // lower bound is 0
+  real y1[N]; 
+  real y2[N];
 }
-"
-stanDso = stan_model(model_code = modelString)
 
-N = 50; z=10; y=c(rep(1, z), rep(0, N - z))
+parameters {
+  real<lower=0> mu1;
+  real<lower=0> mu2;
+}
 
-dataList = list(y = y, N = N)
+transformed parameters{
 
-stanFit = sampling(object = stanDso, data=dataList, chains=3, iter=1000, warmup=200, thin=1)
+real delta;
+delta = mu1 - mu2;
+}
+
+model{
+  mu1 ~ uniform(0,20);
+  mu2 ~ uniform(0,20);
+  y1 ~ normal(mu1, 2);
+  y2 ~ normal(mu2, 2);
+}"
+
+#===========compile model ========================
+
+stanDso = stan_model(model_code = modelGaussian) 
+
+#===============  Data Feed ======================
+
+N=length(HWS$yH)
+y1= HWS$yH
+y2 = HWS$yG
+
+dataList = list(y1 = y1, y2 = y2, N = N)
+
+fit = sampling(object = stanDso, data=dataList, chains=3, iter=3333, warmup=555, thin=1)
+
+class(fit)
 traceplot(stanFit)
-stanFit
+plot(fit)
+post <- extract(fit)
 
-
+#======== convert stan format to coda format ========== 
 
 #================= setting up STAN =================
 Sys.which("g++")
