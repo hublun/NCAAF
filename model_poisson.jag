@@ -1,13 +1,14 @@
 model {
  for (i in 1:Nt){
-  y1[i]~dpois(mu1) # likelihood distribution
-  y2[i]~dpois(mu2)
+  y1[i]~dpois(mu1[x[i]]) # likelihood distribution
+  y2[i]~dpois(mu2[x[i]])
  }
- mu1 ~ dunif(0,20) #prior distribution for mu1
- mu2 ~ dunif(0,20) #prior distribution for mu2
-
+for ( j in 1:Nl){
+ mu1[j] ~ dunif(0, 10) #prior distribution for mu1
+ mu2[j] ~ dunif(0, 30) #prior distribution for mu2
+}
  # transformed parameters
 
- mud = mu1 - mu2 # scoring rage difference
-
+  # scoring rage difference
+     for (j in 1:Nl){ mud[j]=mu1[j]-mu2[j]}
  }

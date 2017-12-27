@@ -64,36 +64,45 @@ meanY2
 sdY1 = sd(y1)
 sdY2 = sd(y2)
 
+NLevel = nlevels(HWS$xC)
+x1 =as.integer(levels(HWS$xC))[HWS$xC]
+
 t.test(y1, y2)
 t.test(y3, mu=0) # t-test show significance of goal differential 
 
-dataList = list(y1=y1, y2=y2, Nt = Ntotal)#, m1=meanY1, m2 = meanY2, sd1=sdY1, sd2=sdY2) # data to be fed into JAGS model
-# ==+++++++++++++++++++++++ Model definition +++++++++++++++++======
-model=FALSE
+#dy = density(y1)
+#y1 = dy$y
+#Ntotal = length(y1)
 
-if (model) {
+dataList = list(y1=y1, y2=y2, x = x1, Nt = Ntotal, Nl = NLevel)#, m1=meanY1, m2 = meanY2, sd1=sdY1, sd2=sdY2) # data to be fed into JAGS model
+# ==+++++++++++++++++++++++ Model definition +++++++++++++++++======
+ 
+
+ 
  cat("model {
  for (i in 1:Nt){
-  y1[i]~dpois(mu1) # likelihood distribution
-  y2[i]~dpois(mu2)
+  y1[i]~dpois(mu1[x[i]]) # likelihood distribution
+  y2[i]~dpois(mu2[x[i]])
  }
- mu1 ~ dunif(0,20) #prior distribution for mu1
- mu2 ~ dunif(0,20) #prior distribution for mu2
-
+for ( j in 1:Nl){
+ mu1[j] ~ dunif(0, 10) #prior distribution for mu1
+ mu2[j] ~ dunif(0, 30) #prior distribution for mu2
+}
  # transformed parameters
 
- mud = mu1 - mu2 # scoring rage difference
-
- }", file = "model_poisson.jag") # write the model string to file
- }else{    
+  # scoring rage difference
+     for (j in 1:Nl){ mud[j]=mu1[j]-mu2[j]}
+ }", 
+ file = "model_poisson.jag") # write the model string to file
+    
 #-----------------------------------------------------------------
  cat("model {
  for (i in 1:Nt){
-     y1[i]~dnorm(mu1, 1/4) # likelihood distribution
-     y2[i]~dnorm(mu2, 1/4)
+     y1[i] ~ dnorm(mu1, 1/4) # likelihood distribution
+     y2[i] ~ dnorm(mu2, 1/4)
     }
-    mu1 ~ dunif(0,10) #prior distribution for mu1
-    mu2 ~ dunif(0,10) #prior distribution for mu2
+    mu1 ~ dunif(0,30) #prior distribution for mu1
+    mu2 ~ dunif(0,30) #prior distribution for mu2
     #sigma1 ~ dunif(1, 15)
     #sigma2 ~ dunif(1, 15)
     # transformed parameters
@@ -101,7 +110,7 @@ if (model) {
     mud = mu1 - mu2 # scoring rage difference
     
     }", file = "model_gaussian.jag") # write the model string to file
-}
+
 #+++++++++++++++++++ make initial values for parameters in model ++++++++++++++++++++++++
 initsList = function(){
   resampledY1 = sample(y1, replace = TRUE)
@@ -114,22 +123,22 @@ initsList = function(){
   return (list(mu1 = mu1Init, mu2=mu2Init))
 }
 #========================================= Run JAGs Model =================================================
-jagsModel = jags.model(file = "model_gaussian.jag", data=dataList, #inits = initsList, 
+jagsModel = jags.model(file = "model_poisson.jag", data=dataList, #inits = initsList, 
                        n.chains = 3, n.adapt = 500) # compile the model and find the appropriate MCMC sampler 
+remove(jagsModel)
+
 update(jagsModel, n.iter = 500) #run 'burn-in' cycles of 500
 
-coda.Samples = coda.samples(jagsModel, variable.names = c("mu1", "mu2", "mud"), # "sigma1", "sigma2"), 
+coda.Samples = coda.samples(jagsModel, variable.names = c("mud"), # "sigma1", "sigma2"), 
                             n.iter = 3334) # formal model run and return a list of matrices
 #==============================================================================++++++++++++++++++++========
 varnames(coda.Samples) # all par names in the coda object
 
-diagMCMC(codaObject = coda.Samples, parName = c("mu1"))
-diagMCMC(codaObject = coda.Samples, parName = c("mud"))
+#diagMCMC(codaObject = coda.Samples, parName = c("mu1[2]"))
+#diagMCMC(codaObject = coda.Samples, parName = c("mu2[2]"))
 
-#muvalue1 = unlist(coda.Samples[,1])
-#muvalue2 = unlist(coda.Samples[,2])
-#HWDiff = muvalue1-muvalue2
-#mean(HWDiff)
+diagMCMC(codaObject = coda.Samples, parName = c("mud[2]"))
+
 #unlist(coda.Samples[3]) # list of three  mcmc.list objects
 #====================== plotting multiple panel style====================================================================
 par(mfrow=c(1,1))
@@ -224,15 +233,16 @@ axis(1, at=c(seq(-5,8,0.5)),
      las=1)
 #===============================================================
 par(mfrow=c(1,1))
-
-plotPost(coda.Samples[,1], main = "Goal Scoring Rate - Home", xlab=bquote(lambda), cenTend = "mode", xlim=c(1.5, 4.5),
-         compVal = 2.97,
+ 
+plotPost(coda.Samples[,i], main = "Goal Scoring Rate - Home", xlab=bquote(lambda), cenTend = "mode", xlim=c(1.5, 4.5),
+         compVal = 3,
          
          col = "#123498",
          #ROPE = c(2.15,3.15), 
          credMass = 0.90, 
          showCurve = TRUE, 
          border = "green")
+ 
 
 plotPost(coda.Samples[,2], main = "Goal Scoring Rate - Away", 
          
@@ -242,7 +252,9 @@ plotPost(coda.Samples[,2], main = "Goal Scoring Rate - Away",
          #ROPE = c(2.15,3.15), 
          credMass = 0.90, showCurve = TRUE, border = "green")
 
-plotPost(coda.Samples[,3], main = "Goal Scoring Differential: Home-Away", 
+plotPost(coda.Samples[,29], 
+         
+         main = "Goal Scoring Differential: Home-Away", 
          xlab=bquote(Delta), 
          #ylab = "Density",
          #ylim=c(0.0, 2.0),

@@ -1,13 +1,82 @@
 
-
-#x1 = unlist(coda.Samples[,3])
-
+#levels(as.factor(HWS$Club))[1]
 
 x1 = post$delta # stanfit object interface
 x1
+
+x30 = x1[,1:5]
+
+
+
+x20 = x1[,1:20]
+
+x24 = x1[,50:56]
+#remove(x20)
+
+m20 = melt(x20)
+m21  = melt(x21)
+m22  = melt(x22)
+m23  = melt(x23)
+m24  = melt(x24)
+
+m30 = melt(x30)
+
+colnames(m20)[2] = "club"
+colnames(m21)[2] = "club"
+colnames(m22)[2] = "club"
+colnames(m23)[2] = "club"
+colnames(m24)[2] = "club"
+
+colnames(m30)[2] = "club"
+
+epl = unique(HWS$Club)[1:20]
+league1 = unique(HWS$Club)[21:28]
+liga = unique(HWS$Club)[29:40]
+bundesliga = unique(HWS$Club)[41:49]
+seriea = unique(HWS$Club)[50:56]
+
+leagues = unique(HWS$League)[1:5]
+leagues
+
+league1
+epl
+liga
+m20$team = epl[m20$club]
+m21$team = league1[m21$club]
+m22$team = liga[m22$club]
+m23$team = bundesliga[m23$club]
+m24$team = seriea[m24$club]
+
+m30$team = leagues[m30$club]
+tail(m30)
+#======================== facet wrap =========================================
+
+league_plot(m21 = m30, num_col = 2)
+
+league_plot = function(m21, num_col=2, label_x="parameter estimation at league level", hadjust=10){
+  
+  dhd = ddply(m21, .(team), summarise, int.low = hdi(value)[1], int.high = hdi(value)[2])
+  plt1 = ggplot(data=m21, aes(x=value))+geom_density(col="#dddddd", fill="#888888") + facet_wrap(~ team, ncol=num_col) + theme_Posterior
+  plt2 = plt1 + geom_segment(data=dhd, aes(x=int.low, xend=int.high, y=0.01*hadjust, yend=0.01*hadjust), size = 2, color="#ffffff") + facet_wrap(~team, ncol=num_col)
+  plt3 = plt2 + geom_vline(aes(xintercept=0), linetype=2, col = "#bbbbbb") + facet_wrap(~team, ncol=num_col)                 
+  return (plt3 + labs(x = label_x))
+}
+#=========================================================
+ 
+ 
+
+#==========================
+dd_plot(m20$value) + facet_wrap(.~ club)
+#-------------------------------
+p_plot = function(x1, j=1){
+      
+     return (dd_plot(x1[,j], label=unique(HWS$Club[HWS$xC==j])))
+}
+
+#=====================================================
+dd_plot = function(x1, label="Delta"){
+
 dat = with(density(x1), data.frame(x,y))
-
-
 cent = dat$x[dat$y == max(dat$y)]
 
 HDIInterval = hdi(density(x1), credMass = 0.95)
@@ -16,6 +85,8 @@ HDIInterval
 Hdl = HDIInterval[1]
 Hdu = HDIInterval[2]
 
+return(
+  
 ggplot(data=dat, mapping=aes(x=x,y=y)) + theme_Posterior + 
   
   geom_line() +
@@ -23,14 +94,14 @@ ggplot(data=dat, mapping=aes(x=x,y=y)) + theme_Posterior +
   geom_vline(xintercept = cent, linetype=2)+
   geom_vline(xintercept = 0, linetype=4, size=1)+  
   scale_y_continuous(expand = c(0,0)) +
-  scale_x_continuous(name = "Most Away Goals",
+  scale_x_continuous(name = label,
                      #expand = c(0,0), # no expansion buffer 
-                     breaks = seq(0, 4, 0.25),
+                     breaks = seq(-1, 4, 1),
                      limits=c(min(Hdl - 0.5,0), Hdu + 0.5)
                      )
- p1 = last_plot()
- p2 = last_plot()
- p3 = last_plot()
+  )
+}
+
  
  #==================Create Own Theme ======================  
 theme_Posterior = theme(
@@ -101,7 +172,7 @@ ggplot(data = df, aes(x=x1, y=y1)) +
 
 
 #=======================================multiplot ================================= 
-multiplot(p1, p2, cols=1)
+#multiplot(p1, p2, p3, p4, p5, p6, p7,p8,p9,p10,p11,p12,p13,p14,p15,p16,p17,p18,p19,p20, cols=4)
 
 
 # Multiple plot function

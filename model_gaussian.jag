@@ -1,10 +1,10 @@
 model {
  for (i in 1:Nt){
-     y1[i]~dnorm(mu1, 1/4) # likelihood distribution
-     y2[i]~dnorm(mu2, 1/4)
+     y1[i] ~ dnorm(mu1, 1/4) # likelihood distribution
+     y2[i] ~ dnorm(mu2, 1/4)
     }
-    mu1 ~ dunif(0,10) #prior distribution for mu1
-    mu2 ~ dunif(0,10) #prior distribution for mu2
+    mu1 ~ dunif(0,30) #prior distribution for mu1
+    mu2 ~ dunif(0,30) #prior distribution for mu2
     #sigma1 ~ dunif(1, 15)
     #sigma2 ~ dunif(1, 15)
     # transformed parameters
