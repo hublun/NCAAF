@@ -1,7 +1,7 @@
 
 #levels(as.factor(HWS$Club))[1]
 
-x1 = post$delta # stanfit object interface
+x1 = post$dev_high1 # stanfit object interface
 x1
 
 x30 = x1[,1:5]

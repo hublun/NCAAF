@@ -84,31 +84,121 @@ model{
   y1 ~ normal(mu1, 2);
   y2 ~ normal(mu2, 2);
 }"
+#=================================================
+mPois3 ="
+
+data{
+  int<lower = 1> N;// lower bound is 0
+  int<lower = 1> Nl; // number of first levels
+  int<lower = 1> Nh; // number of higher levels
+  
+  int xL[N]; // team identifier
+  int xH[N]; // league identifier  
+  int y1[N]; 
+  int y2[N];
+}
+
+parameters {
+  
+  real <lower = 0> beta_01;  // intercept
+  real <lower = 0> beta_02;  // intercept
+
+ 
+  
+  real dev_high1[Nh]; // devation from average between leagues
+  real dev_high2[Nh];
+ 
+  real dev_low1[Nl]; // devation from average between teams
+  real dev_low2[Nl];
+
+}
+
+transformed parameters{
+
+  real beta_0;
+
+  real<lower=0> lambda_h1[Nh];
+  real<lower=0> lambda_h2[Nh];
+ 
+  real<lower=0> lambda_l1[Nl];
+  real<lower=0> lambda_l2[Nl];
+
+  real delta_h[Nh]; //rate differential at league level
+  real delta_l[Nl]; // rate differential at club level
+ 
+  beta_0 = beta_01 - beta_02;
+
+
+for (i in 1:N){
+
+  lambda_h1[xH[i]] = beta_01 + dev_high1[xH[i]];
+  lambda_h2[xH[i]] = beta_02 + dev_high2[xH[i]];
+
+  delta_h[xH[i]] =   lambda_h1[xH[i]] -   lambda_h2[xH[i]];
+
+  lambda_l1[xL[i]] = lambda_h1[xH[i]] + dev_low1[xL[i]];
+  lambda_l2[xL[i]] = lambda_h2[xH[i]] + dev_low2[xL[i]]; 
+
+  delta_l[xL[i]] =   lambda_l1[xL[i]] -   lambda_l2[xL[i]];
+
+ }
+
+}
+
+model{
+
+beta_01 ~ cauchy(0, 10);
+beta_02 ~ cauchy(0, 10);
+
+
+dev_high1 ~ normal(0, 1);
+dev_high2 ~ normal(0, 1);
+dev_low1 ~ normal(0, 1);
+dev_low2 ~ normal(0, 1);
+
+
+// likelihood 
+
+for (i in 1:N){
+
+  y1[i] ~ poisson(lambda_l1[xL[i]]);
+  y2[i] ~ poisson(lambda_l2[xL[i]]);
+  }
+
+}"
 
 #===========compile model ========================
 #stanDso = stan_model(model_code = simplePoisson) 
 
-stanDso = stan_model(model_code = modelPoisson) 
+stanDso = stan_model(model_code = mPois3) 
 #===============  Data Feed ======================
 
 N=length(HWS$yH)
 y1= HWS$yH
 y2 = HWS$yG
-x = HWS$xL
-x 
-x1 = as.integer(levels(x))[x]
-x1
-n1 = nlevels(x)
-dataList = list(y1 = y1, y2 = y2, x=x1, 
-                N = N, Nl = n1)
+x1 = HWS$xC
+x2 = HWS$xL 
+x1 = as.integer(levels(x1))[x1]
+x2 = as.integer(levels(x2))[x2]
+x2
+ 
+n1 =  length(unique(x1))
+n2 =  length(unique(x2))
+n2
+dataList = list(y1 = y1, y2 = y2, xL=x1, xH = x2,  
+                N = N, Nl = n1, Nh = n2)
 
-fit = sampling(object = stanDso, data=dataList, chains=3, iter=333, warmup=155, thin=1)
+fit = sampling(object = stanDso, data=dataList, 
+               init=0, control=list(adapt_delta = 0.9),
+               chains=3, iter=999, warmup=333, thin=1)
 
 class(fit)
+
 traceplot(fit)
 summary(fit)
+#pairs(fit)
 
-plot(fit, ci_level = 0.95, #pars=c("delta[2]"), 
+plot(fit, ci_level = 0.95, pars=c("beta_0"), 
      
   show_density=TRUE, fill_color="#dedeff") +
   
@@ -120,7 +210,7 @@ get_posterior_mean(fit)
 
 post <- extract(fit)
 
-ncol(post$delta)
+nrow(post$lambda_h1)
 
 #======== convert stan format to coda format ========== 
 
