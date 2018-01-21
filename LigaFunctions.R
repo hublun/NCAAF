@@ -1,3 +1,6 @@
+library(RCurl)
+library(XML)
+library(stringr)
 #=========================attendance H3s ========================================
 is.AttendanceNode <- function(att) {
   return (str_detect(xmlValue(att[[1]]), "Attendance"))
@@ -66,8 +69,12 @@ getScoreResult <- function(h3p.node){
   v1 <- as.integer(xmlValue(scores[[1]])) 
   v2 <- as.integer(xmlValue(scores[[2]]))
   #=============================== return result =================================
-  if (str_detect(p.var.name, "goal"))
-    result = max(v1, v2)
+  if (str_detect(p.var.name, "Goal")){
+    if (str_detect(p.var.name, "Home"))
+      result = v1
+    else
+      result = v2
+  }
   else
     result = abs(v1-v2)
   #=====return result data.frame ================
@@ -103,14 +110,16 @@ getStreakResult <- function(h3p.node){
 #======================================================================
 getStats <- function(club.id, club.season){
   #============================================================================================
-  url.1 =paste("http://www.espnfc.us/club/barcelona/", club.id, 
-               "/statistics/performance?leagueId=all&season=", club.season, sep="")
+  url.1 =paste("http://www.espnfc.us/club/chelsea/", club.id, 
+               "/statistics/performance?leagueId=23&season=", club.season, sep="")
   
   web_page_text <-getURLContent(url.1)
   #web_page_text <- getURLContent("http://www.espn.com/college-football/team/stats/_/id/333/year/2007")
   #print(attributes(web_page_text))
   club.tree <- htmlTreeParse(web_page_text, useInternalNodes = TRUE, asText = TRUE, isHTML = TRUE)
-  #print(attributes(tree))
+  
+  #====================================
+  #print(attributes(club.tree))
   #print(club.tree)
   #============== XPath =====select nodes anywhere in the document for the <div> tags==========
   
@@ -136,4 +145,20 @@ getStats <- function(club.id, club.season){
   club.frame
   #==================================form all Goal data.frame ========================================
   return (club.frame)
-} #==================================
+}
+#=================================All seasons Data ==================================================
+getClubStats <- function(club.id){
+  
+  club.stats <- data.frame()
+  
+  for (i in club.season.most.past:club.season.most.recent){ 
+    #===========================================================
+    statt <- getStats(club.id, i)
+    
+    if (dim(statt)[2] == 13) {
+      club.stats <- rbind.data.frame(club.stats, statt)
+    } 
+    
+  } #=========================================================
+  return (club.stats)
+} #=========================================================
