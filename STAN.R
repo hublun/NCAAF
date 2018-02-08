@@ -188,6 +188,8 @@ n2
 dataList = list(y1 = y1, y2 = y2, xL=x1, xH = x2,  
                 N = N, Nl = n1, Nh = n2)
 
+#======== 
+
 fit = sampling(object = stanDso, data=dataList, 
                init=0, control=list(adapt_delta = 0.9),
                chains=3, iter=999, warmup=333, thin=1)
