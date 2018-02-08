@@ -151,10 +151,10 @@ beta_01 ~ cauchy(0, 10);
 beta_02 ~ cauchy(0, 10);
 
 
-dev_high1 ~ normal(0, 1);
-dev_high2 ~ normal(0, 1);
-dev_low1 ~ normal(0, 1);
-dev_low2 ~ normal(0, 1);
+dev_high1 ~ normal(0, 2);
+dev_high2 ~ normal(0, 2);
+dev_low1 ~ normal(0, 2);
+dev_low2 ~ normal(0, 2);
 
 
 // likelihood 
