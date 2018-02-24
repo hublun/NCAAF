@@ -247,4 +247,97 @@ Keywords: reproducibility; replicability; validity; questionable research practi
   __markedentry = {[cjdua:]},
 }
 
+@Article{doi:10.1177/0149206316647099,
+  author   = {Jeremy D. Meuser and William L. Gardner and Jessica E. Dinh and Jinyu Hu and Robert C. Liden and Robert G. Lord},
+  title    = {A Network Analysis of Leadership Theory: The Infancy of Integration},
+  journal  = {Journal of Management},
+  year     = {2016},
+  volume   = {42},
+  number   = {5},
+  pages    = {1374-1403},
+  abstract = { We investigated the status of leadership theory integration by reviewing 14 years of published research (2000 through 2013) in 10 top journals (864 articles). The authors of these articles examined 49 leadership approaches/theories, and in 293 articles, 3 or more of these leadership approaches were included in their investigations. Focusing on these articles that reflected relatively extensive integration, we applied an inductive approach and used graphic network analysis as a guide for drawing conclusions about the status of leadership theory integration. All 293 articles included in the analysis identified 1 focal theory that was integrated with 2 or more supporting leadership theories. The 6 leadership approaches most often appearing as the focal theory were transformational leadership, charismatic leadership, strategic leadership, leadership and diversity, participative/shared leadership, and the trait approach to leadership. On the basis of inductive reflections on our analysis, we make two key observations. First, the 49 focal leadership theories qualify as middle-range theories that are ripe for integration. Second, drawing from social network theory, we introduce the term “theoretical neighborhood” to describe the focal theoretical networks. Our graphical inductive analyses reveal potential connections among neighboring middle-range leadership theories that merit investigation and, hence, identify promising future directions for achieving greater theoretical integration. We provide an online supplement with 10 additional leadership theory graphs and analyses: leadership in teams and decision groups, ethical leadership, leader and follower cognitions, leadership emergence, leadership development, emotions and leadership, implicit leadership, leader-member exchange, authentic leadership, and identity and identification process theories of leadership. },
+  doi      = {10.1177/0149206316647099},
+  eprint   = {https://doi.org/10.1177/0149206316647099},
+  file     = {:D\:/Github/Informs/Articles/0149206316647099.pdf:PDF},
+  url      = { 
+        https://doi.org/10.1177/0149206316647099
+    
+},
+}
+
+@Article{doi:10.1177/0149206316675031,
+  author   = {Roy Suddaby and William M. Foster},
+  title    = {History and Organizational Change},
+  journal  = {Journal of Management},
+  year     = {2017},
+  volume   = {43},
+  number   = {1},
+  pages    = {19-38},
+  abstract = { This research commentary introduces historical consciousness to studying organizational change. Most theories of organizational change contain within them implicit assumptions about history. Made explicit, these assumptions tend to cluster into different models of change that vary by the assumed objectivity of the past and the associated malleability of the future. We explore and elaborate the implicit assumptions of history. We identify four implicit models of history in the change literature: History-as-Fact, History-as-Power, History-as-Sensemaking, and History-as-Rhetoric. We discuss the implications of theorizing organizational change from each of these views of history and outline future directions for studying change with a heightened understanding of history. },
+  doi      = {10.1177/0149206316675031},
+  eprint   = {https://doi.org/10.1177/0149206316675031},
+  file     = {:D\:/Github/Informs/Articles/0149206316675031.pdf:PDF},
+  url      = { 
+        https://doi.org/10.1177/0149206316675031
+    
+},
+}
+
+@Article{doi:10.1177/0149206313503018,
+  author   = {Philip L. Roth and Philip Bobko and Chad H. Van Iddekinge and Jason B. Thatcher},
+  title    = {Social Media in Employee-Selection-Related Decisions: A Research Agenda for Uncharted Territory},
+  journal  = {Journal of Management},
+  year     = {2016},
+  volume   = {42},
+  number   = {1},
+  pages    = {269-298},
+  abstract = { Social media (SM) pervades our society. One rapidly growing application of SM is its use in personnel decision making. Organizations are increasingly searching SM (e.g., Facebook) to gather information about potential employees. In this article, we suggest that organizational practice has outpaced the scientific study of SM assessments in an area that has important consequences for individuals (e.g., being selected for work), organizations (e.g., successfully predicting job performance or withdrawal), and society (e.g., consequent adverse impact/diversity). We draw on theory and research from various literatures to advance a research agenda that addresses this gap between practice and research. Overall, we believe this is a somewhat rare moment in the human resources literature when a new class of selection methods arrives on the scene, and we urge researchers to help understand the implications of using SM assessments for personnel decisions. },
+  doi      = {10.1177/0149206313503018},
+  eprint   = {https://doi.org/10.1177/0149206313503018},
+  file     = {:D\:/Github/Informs/Articles/0149206313503018.pdf:PDF},
+  url      = { 
+        https://doi.org/10.1177/0149206313503018
+    
+},
+}
+
+@Article{,
+}
+
+@Article{doi:10.1177/0001839216674457,
+  author   = {Kevin Zheng Zhou and Gerald Yong Gao and Hongxin Zhao},
+  title    = {State Ownership and Firm Innovation in China: An Integrated View of Institutional and Efficiency Logics},
+  journal  = {Administrative Science Quarterly},
+  year     = {2017},
+  volume   = {62},
+  number   = {2},
+  pages    = {375-404},
+  abstract = { Using two longitudinal panel datasets of Chinese manufacturing firms, we assess whether state ownership benefits or impedes firms’ innovation. We show that state ownership in an emerging economy enables a firm to obtain crucial R\&D resources but makes the firm less efficient in using those resources to generate innovation, and we find that a minority state ownership is an optimal structure for innovation development in this context. Moreover, the inefficiency of state ownership in transforming R\&D input into innovation output decreases when industrial competition is high, as well as for start-up firms. Our findings integrate the efficiency logic (agency theory), which views state ownership as detrimental to innovation, and institutional logic, which notes that governments in emerging economies have critical influences on regulatory policies and control over scarce resources. We discuss the implications of these findings for research on state ownership and firm innovation in emerging economies. },
+  doi      = {10.1177/0001839216674457},
+  eprint   = {https://doi.org/10.1177/0001839216674457},
+  file     = {:D\:/Github/Informs/Articles/0001839216674457.pdf:PDF},
+  url      = { 
+        https://doi.org/10.1177/0001839216674457
+    
+},
+}
+
+@Article{doi:10.1177/0001839217705375,
+  author   = {Letian Zhang},
+  title    = {A Fair Game? Racial Bias and Repeated Interaction between NBA Coaches and Players},
+  journal  = {Administrative Science Quarterly},
+  year     = {2017},
+  volume   = {62},
+  number   = {4},
+  pages    = {603-625},
+  abstract = { There is strong evidence of racial bias in organizations but little understanding of how it changes with repeated interaction. This study proposes that repeated interaction has the potential to reduce racial bias, but its moderating effects may be limited to the treatment of individuals rather than of entire racial groups. Using data from 2,360 National Basketball Association (NBA) players and 163 coaches from 1955 to 2000, I find that players receive more playing time under coaches of the same race, even though there is no difference in their performance. This racial bias is greatly reduced, however, as the player and the coach spend more time on the same team, suggesting that repeated interaction minimizes coaches’ biases toward their players. But it does not reduce coaches’ racial biases in general. Even after years of coaching other-race players, coaches still exhibit the same levels of racial bias as they did upon first entering the league. These results suggest that repeated workplace interaction is effective in reducing racial bias toward individuals but not toward groups, making an important contribution to the literature on organizational inequality. },
+  doi      = {10.1177/0001839217705375},
+  eprint   = {https://doi.org/10.1177/0001839217705375},
+  file     = {:D\:/Github/Informs/Articles/0001839217705375.pdf:PDF},
+  url      = { 
+        https://doi.org/10.1177/0001839217705375
+    
+},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}
