@@ -8,4 +8,17 @@ ggplot(data=clus, aes(x=clus$avg)) + geom_density() + stat_function(geom="area" 
 +theme_light()
 
 
-ggplot(data = Accuracy_vs_Bias, aes(x=Bias, y=Accuracy)) + geom_point(color = "white") + theme_dark()
+ggplot(data = PBS1000, aes(x=Bias, y=Accuracy)) + 
+  geom_hline(yintercept = 0.9466, linetype = 5) +
+  geom_hline(yintercept = 0.9548, linetype = 5) +  
+  geom_hline(yintercept = 0.9507, linetype = 5) + 
+  geom_hline(yintercept = 0.9489, linetype = 5) + 
+  geom_hline(yintercept = 0.9565, linetype = 5) + 
+
+  geom_vline(xintercept = 0.959, linetype = 5) + 
+  geom_vline(xintercept = 1.95, linetype = 5) + 
+  geom_vline(xintercept = 1.535, linetype = 5) + 
+  geom_vline(xintercept = 1.627, linetype = 5) + 
+  geom_vline(xintercept = 1.44, linetype = 5) + 
+  
+  geom_point(color = "blue", size=5) + theme_gray()

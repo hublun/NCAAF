@@ -31,12 +31,12 @@ length(index.t)
 index.tr
 
 dataset.test <- Fish[-index.t,]
-for (i in 1:50){
-  
+
+for (i in 1:1000){
   index.tr <- index.t[sample(length(index.t), round(length(index.t)*0.8), replace = FALSE)]
   Chd <- chaid(model, data = Fish[index.tr,])
   o <- ML.metrcs()
-  cat(i, "\t", o[1], "\t", o[2], "\n", file = "Precbias.csv", append = TRUE)
+  cat(i, "\t", o[1], "\t", o[2], "\n", file = "PBS1000.csv", append = TRUE)
   }
 #====================================================================
 
