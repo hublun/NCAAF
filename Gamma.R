@@ -8,17 +8,17 @@ ggplot(data=clus, aes(x=clus$avg)) + geom_density() + stat_function(geom="area" 
 +theme_light()
 
 
-ggplot(data = PBS1000, aes(x=Bias, y=Accuracy)) + 
-  geom_hline(yintercept = 0.9466, linetype = 5) +
+ggplot(data = PBS1000_1_, aes(x=Bias, y=Accuracy, label=Lab)) + 
+  geom_hline(yintercept = 0.95022, linetype = 5) +
   geom_hline(yintercept = 0.9548, linetype = 5) +  
   geom_hline(yintercept = 0.9507, linetype = 5) + 
-  geom_hline(yintercept = 0.9489, linetype = 5) + 
-  geom_hline(yintercept = 0.9565, linetype = 5) + 
-
-  geom_vline(xintercept = 0.959, linetype = 5) + 
-  geom_vline(xintercept = 1.95, linetype = 5) + 
-  geom_vline(xintercept = 1.535, linetype = 5) + 
-  geom_vline(xintercept = 1.627, linetype = 5) + 
-  geom_vline(xintercept = 1.44, linetype = 5) + 
+  geom_hline(yintercept = 0.9471, linetype = 5) + 
+  geom_hline(yintercept = 0.9566, linetype = 5) +
   
-  geom_point(color = "blue", size=5) + theme_gray()
+  geom_vline(xintercept = 0.959, linetype = 5) + 
+  geom_vline(xintercept = 2.162, linetype = 5) + 
+  geom_vline(xintercept = 1.535, linetype = 5) + 
+  geom_vline(xintercept = 1.82, linetype = 5) + 
+  geom_vline(xintercept = 1.44, linetype = 5) + 
+  geom_point(color="#336655", size=4) + theme_gray()+
+  geom_text(color="#123321", size=5, hjust = -0.5, vjust = -0.5)
