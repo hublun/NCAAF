@@ -12,11 +12,11 @@ ggplot(data = PBS1000_1_, aes(x=Bias, y=Accuracy, label=Lab)) +
   geom_hline(yintercept = 0.95022, linetype = 5) +
   geom_hline(yintercept = 0.9548, linetype = 5) +  
   geom_hline(yintercept = 0.9507, linetype = 5) + 
-  geom_hline(yintercept = 0.9471, linetype = 5) + 
+  geom_hline(yintercept = 0.943, linetype = 5) + 
   geom_hline(yintercept = 0.9566, linetype = 5) +
   
   geom_vline(xintercept = 0.959, linetype = 5) + 
-  geom_vline(xintercept = 2.162, linetype = 5) + 
+  geom_vline(xintercept = 0.31, linetype = 5) + 
   geom_vline(xintercept = 1.535, linetype = 5) + 
   geom_vline(xintercept = 1.82, linetype = 5) + 
   geom_vline(xintercept = 1.44, linetype = 5) + 
