@@ -108,6 +108,7 @@ Reproducibility is not well understood because the incentives for individual sci
   abstract  = {In this article, we accomplish two things. First, we show that despite empirical psychologists’ nominal endorsement of a low rate of false-positive findings (≤ .05), flexibility in data collection, analysis, and reporting dramatically increases actual false-positive rates. In many cases, a researcher is more likely to falsely find evidence that an effect exists than to correctly find evidence that it does not. We present computer simulations and a pair of actual experiments that demonstrate how unacceptably easy it is to accumulate (and report) statistically significant evidence for a false hypothesis. Second, we suggest a simple, low-cost, and straightforwardly effective disclosure-based solution to this problem. The solution involves six concrete requirements for authors and four guidelines for reviewers, all of which impose a minimal burden on the publication process.
 
 Keywords methodology, motivated reasoning, publication, disclosure},
+  keywords  = {rank3},
   publisher = {Sage Publications Sage CA: Los Angeles, CA},
 }
 
@@ -195,6 +196,7 @@ Keywords: reproducibility; replicability; validity; questionable research practi
   month     = {jun},
   abstract  = {In this paper, we provide a tutorial exposition on the Bayesian approach in analyzing structural equation models (SEMs). SEMs, which can be regarded as regression models with observed and latent variables, have been widely applied to substantive research. However, the classical methods and most commercial software in this area are based on the covariance structure approach, which would encounter serious difficulties when dealing with complicated models and/or data structures. In contrast, the Bayesian approach has much more flexibility in handling complex situations. We give a brief introduction to SEMs and a detailed description of how to apply the Bayesian approach to this kind of model. Advantages of the Bayesian approach are discussed, and results obtained from a simulation study are provided for illustration. The intended audience is statisticians/methodologists who either know about SEMs or simple Bayesian statistics, and Ph.D. students in statistics, psychometrics, or mathematical psychology.},
   doi       = {10.1016/j.jmp.2012.02.001},
+  file      = {:D\:/Github/Informs/Articles/Tutorial_Bayesian_SEM.pdf:PDF},
   publisher = {Elsevier {BV}},
 }
 
@@ -342,7 +344,7 @@ Keywords: reproducibility; replicability; validity; questionable research practi
   volume        = {9},
   number        = {6},
   pages         = {641--651},
-  __markedentry = {[cjdua:6]},
+  __markedentry = {[cjdua:4]},
   file          = {:D\:/Github/Informs/Articles/1745691614551642.pdf:PDF},
   publisher     = {Sage Publications Sage CA: Los Angeles, CA},
 }
@@ -430,6 +432,35 @@ Keywords: reproducibility; replicability; validity; questionable research practi
   doi       = {10.1177/2059799115622763},
   file      = {:D\:/Github/Informs/Articles/2059799115622763.pdf:PDF},
   publisher = {{SAGE} Publications},
+}
+
+@Article{2018arXiv180302436A,
+  author        = {{Antonoyiannakis}, M.},
+  title         = {{Impact Factors and the Central Limit Theorem}},
+  journal       = {ArXiv e-prints},
+  year          = {2018},
+  month         = mar,
+  adsnote       = {Provided by the SAO/NASA Astrophysics Data System},
+  adsurl        = {http://adsabs.harvard.edu/abs/2018arXiv180302436A},
+  archiveprefix = {arXiv},
+  eprint        = {1803.02436},
+  file          = {:D\:/Github/Informs/Articles/1803.02436.pdf:PDF},
+  keywords      = {Physics - Physics and Society, Computer Science - Digital Libraries},
+  primaryclass  = {physics.soc-ph},
+}
+
+@Article{doi:10.1093/ajcn/nqx067,
+  author  = {Kroeger, Cynthia M and Garza, Cutberto and Lynch, Christopher J and Myers, Esther and Rowe, Sylvia and Schneeman, Barbara O and Sharma, Arya M and Allison, David B},
+  title   = {Scientific rigor and credibility in the nutrition research landscape},
+  journal = {The American Journal of Clinical Nutrition},
+  year    = {2018},
+  volume  = {107},
+  number  = {3},
+  pages   = {484-494},
+  doi     = {10.1093/ajcn/nqx067},
+  eprint  = {/oup/backfile/content_public/journal/ajcn/107/3/10.1093_ajcn_nqx067/2/nqx067.pdf},
+  file    = {:D\:/Github/Informs/Articles/nqx067.pdf:PDF},
+  url     = { + http://dx.doi.org/10.1093/ajcn/nqx067},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}
