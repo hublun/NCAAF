@@ -463,4 +463,23 @@ Keywords: reproducibility; replicability; validity; questionable research practi
   url     = { + http://dx.doi.org/10.1093/ajcn/nqx067},
 }
 
+@Book{hey2009fourth,
+  title     = {The fourth paradigm: data-intensive scientific discovery},
+  publisher = {Microsoft research Redmond, WA},
+  year      = {2009},
+  author    = {Hey, Tony and Tansley, Stewart and Tolle, Kristin M and others},
+  volume    = {1},
+}
+
+@Article{bell2009beyond,
+  author    = {Bell, Gordon and Hey, Tony and Szalay, Alex},
+  title     = {Beyond the data deluge},
+  journal   = {Science},
+  year      = {2009},
+  volume    = {323},
+  number    = {5919},
+  pages     = {1297--1298},
+  publisher = {American Association for the Advancement of Science},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}

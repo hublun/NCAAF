@@ -1,5 +1,5 @@
 #================== Home Field Advantage ==========================
-
+#remove()
 #============= prepare the working environment ====================
 detectCores() # paralell computing
 
@@ -34,29 +34,30 @@ if ( nCores < 4 ) {
 runjagsMethodDefault
 
 #==================  Prerpare Data ===================================
-#HWS <- european_soccer_leagues[,1:5]
-HWS$League
-HWS$xL = factor(HWS$League, levels = unique(HWS$League), labels = c("1","2","3","4","5"))
-#HWS$League <- toupper(HWS$League)
-HWS$xC = factor(HWS$Club, levels = unique(HWS$Club), labels=1:56 )       
-HWS$xS = factor(HWS$Season, levels=unique(HWS$Season), labels = 1:16)
-#HWS$Season[874] = 2003
+#HWS <- ET5[,c(2,3,6,7)]
+#head(HWS)
 
-HWS$yH = as.integer(HWS$MostHomeGoals)
-HWS$yG = as.integer(HWS$MostAwayGoals)
-HWS$yDiff = HWS$yH - HWS$yG
+HWS$xL = factor(HWS$LID, levels = unique(HWS$LID), labels = c("1","2","3","4","5"))
+HWS$League <- toupper(HWS$League)
+HWS$xC = factor(HWS$CID, levels = unique(HWS$CID), labels=1:98)       
+#HWS$xS = factor(HWS$Season, levels=unique(HWS$Season), labels = 1:16)
+
+#HWS$yH = as.integer(HWS$MostHomeGoals)
+#HWS$yG = as.integer(HWS$MostAwayGoals)
+#HWS$yDiff = HWS$yH - HWS$yG
 
 hist(HWS$yH)
 hist(HWS$yG)
-hist(HWS$yDiff[HWS$xS==5])
 
-HWS$League[HWS$xL==2]
+#hist(HWS$yDiff[HWS$xS==5])
+#HWS$League[HWS$xL==2]
 #============================= Simple JAGS Poisson Model ====================================
 y1 = HWS$yH
 y2 = HWS$yG
-y3 = HWS$yDiff
-grp1 = as.integer(HWS$xC)
-NTotal = length(y3)
+
+#grp1 = as.integer(HWS$xC)
+NTotal = length(y1)
+NTotal
 meanY1 = mean(y1)
 meanY1
 meanY2 = mean(y2)
@@ -65,10 +66,11 @@ sdY1 = sd(y1)
 sdY2 = sd(y2)
 
 NLevel = nlevels(HWS$xC)
+NLevel
 x1 =as.integer(levels(HWS$xC))[HWS$xC]
-
+x1
 t.test(y1, y2)
-t.test(y3, mu=0) # t-test show significance of goal differential 
+#t.test(y3, mu=0) # t-test show significance of goal differential 
 
 #dy = density(y1)
 #y1 = dy$y
@@ -134,8 +136,8 @@ coda.Samples = coda.samples(jagsModel, variable.names = c("mud"), # "sigma1", "s
 #==============================================================================++++++++++++++++++++========
 varnames(coda.Samples) # all par names in the coda object
 
-#diagMCMC(codaObject = coda.Samples, parName = c("mu1[2]"))
-#diagMCMC(codaObject = coda.Samples, parName = c("mu2[2]"))
+diagMCMC(codaObject = coda.Samples, parName = c("mu1[2]"))
+diagMCMC(codaObject = coda.Samples, parName = c("mu2[2]"))
 
 diagMCMC(codaObject = coda.Samples, parName = c("mud[2]"))
 
@@ -247,12 +249,12 @@ plotPost(coda.Samples[,i], main = "Goal Scoring Rate - Home", xlab=bquote(lambda
 plotPost(coda.Samples[,2], main = "Goal Scoring Rate - Away", 
          
          col = "#123498",
-         xlab=bquote(lambda), cenTend = "mode", xlim=c(1.5, 4.5),
-         compVal = 2.57, 
+         xlab=bquote(lambda), cenTend = "mode", xlim=c(-1.5, 4.5),
+         compVal = 0.0, 
          #ROPE = c(2.15,3.15), 
          credMass = 0.90, showCurve = TRUE, border = "green")
 
-plotPost(coda.Samples[,29], 
+plotPost(coda.Samples[,3], 
          
          main = "Goal Scoring Differential: Home-Away", 
          xlab=bquote(Delta), 
