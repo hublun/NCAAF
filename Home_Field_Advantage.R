@@ -44,7 +44,7 @@ HWS$xC = factor(HWS$CID, levels = unique(HWS$CID), labels=1:98)
 
 #HWS$yH = as.integer(HWS$MostHomeGoals)
 #HWS$yG = as.integer(HWS$MostAwayGoals)
-#HWS$yDiff = HWS$yH - HWS$yG
+
 
 hist(HWS$yH)
 hist(HWS$yG)

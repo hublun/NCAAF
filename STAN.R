@@ -198,22 +198,25 @@ class(fit)
 
 traceplot(fit)
 summary(fit)
+
 #pairs(fit)
 
-plot(fit, ci_level = 0.95, pars=c("beta_0"), 
+plot(fit, ci_level = 0.90, pars=c("delta_l[1]", "delta_l[2]","delta_l[3]","delta_l[4]","delta_l[5]"), 
      
-  show_density=TRUE, fill_color="#dedeff") +
+  show_density=TRUE, fill_color="#aadeff") +
   
     geom_vline(xintercept = 0, linetype=2) + xlab("")+ylab("") + 
   
     theme_grey()#theme_Posterior
 
+
 get_posterior_mean(fit)
 
 post <- extract(fit)
 
-nrow(post$lambda_h1)
+nrow(post$delta_h)
 
+launch_shinystan(fit)
 #======== convert stan format to coda format ========== 
 
 #================= setting up STAN =================
