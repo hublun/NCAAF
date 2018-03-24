@@ -59,4 +59,126 @@
   publisher = {Springer Nature},
 }
 
+@Article{Brown2017,
+  author    = {Noam Brown and Tuomas Sandholm},
+  title     = {Superhuman {AI} for heads-up no-limit poker: Libratus beats top professionals},
+  journal   = {Science},
+  year      = {2017},
+  volume    = {359},
+  number    = {6374},
+  pages     = {418--424},
+  month     = {dec},
+  doi       = {10.1126/science.aao1733},
+  file      = {:D\:/Dropbox/AI Impact/science.aao1733.full.pdf:PDF},
+  publisher = {American Association for the Advancement of Science ({AAAS})},
+}
+
+@Article{shallue2018identifying,
+  author    = {Shallue, Christopher J and Vanderburg, Andrew},
+  title     = {Identifying Exoplanets with Deep Learning: A Five-planet Resonant Chain around Kepler-80 and an Eighth Planet around Kepler-90},
+  journal   = {The Astronomical Journal},
+  year      = {2018},
+  volume    = {155},
+  number    = {2},
+  pages     = {94},
+  file      = {:C\:/Users/cjdua/Documents/kepler90i.pdf:PDF},
+  publisher = {IOP Publishing},
+}
+
+@Article{Athey2017,
+  author    = {Susan Athey},
+  title     = {Beyond prediction: Using big data for policy problems},
+  journal   = {Science},
+  year      = {2017},
+  volume    = {355},
+  number    = {6324},
+  pages     = {483--485},
+  month     = {feb},
+  doi       = {10.1126/science.aal4321},
+  file      = {:C\:/Users/cjdua/Documents/483.full.pdf:PDF},
+  publisher = {American Association for the Advancement of Science ({AAAS})},
+}
+
+@Article{Chen2017,
+  author    = {Gang Chen and Yaqiong Xiao and Paul A Taylor and Justin K Rajendra and Tracy Riggins and Fengji Geng and Elizabeth Redcay and Robert W Cox},
+  title     = {Handling Multiplicity in Neuroimaging through Bayesian Lenses with Multilevel Modeling},
+  year      = {2017},
+  month     = {dec},
+  doi       = {10.1101/238998},
+  file      = {:C\:/Users/cjdua/Documents/238998.full.pdf:PDF},
+  publisher = {Cold Spring Harbor Laboratory},
+}
+
+@Article{marcus2018deep,
+  author  = {Marcus, Gary},
+  title   = {Deep Learning: A Critical Appraisal},
+  journal = {arXiv preprint arXiv:1801.00631},
+  year    = {2018},
+  file    = {:C\:/Users/cjdua/Documents/1801.00631.pdf:PDF},
+}
+
+@Article{Boullier2016,
+  author  = {Boullier, Dominique},
+  title   = {Big data challenges for the social sciences: From society and opinion to replications},
+  journal = {arXiv preprint arXiv:1607.05034},
+  year    = {2016},
+  file    = {:C\:/Users/cjdua/Documents/EBul-Boullier-Jul2017.pdf:PDF},
+}
+
+@Article{Jia2017,
+  author        = {Jia, Jie and Zhou, Honggang and Li, Yunchun},
+  title         = {Using Deep Neural Network Approximate Bayesian Network},
+  journal       = {arXiv preprint arXiv:1801.00282},
+  year          = {2017},
+  __markedentry = {[cjdua:]},
+  file          = {:C\:/Users/cjdua/Documents/1801.00282.pdf:PDF},
+}
+
+@InProceedings{Dash2003,
+  author        = {Dash, Denver and Cooper, Gregory F},
+  title         = {Model-Averaging with Discrete Bayesian Network Classifiers},
+  booktitle     = {Proc. 9th Int. Workshop Artif. Intell. Statist.},
+  year          = {2003},
+  pages         = {38--45},
+  organization  = {Citeseer},
+  __markedentry = {[cjdua:6]},
+  file          = {:C\:/Users/cjdua/Documents/download.pdf:PDF},
+}
+
+@Article{pearl2018theoretical,
+  author  = {Pearl, Judea},
+  title   = {Theoretical Impediments to Machine Learning With Seven Sparks from the Causal Revolution},
+  journal = {arXiv preprint arXiv:1801.04016},
+  year    = {2018},
+  file    = {:C\:/Users/cjdua/Documents/1801.04016.pdf:PDF},
+}
+
+@InCollection{taddy2018technological,
+  author    = {Taddy, Matt},
+  title     = {The Technological Elements of Artificial Intelligence},
+  booktitle = {Economics of Artificial Intelligence},
+  publisher = {University of Chicago Press},
+  year      = {2018},
+  file      = {:C\:/Users/cjdua/Documents/c14021.pdf:PDF},
+}
+
+@Article{sargsyan2018embedded,
+  author  = {Sargsyan, Khachik and Huan, Xun and Najm, Habib N},
+  title   = {Embedded Model Error Representation for Bayesian Model Calibration},
+  journal = {arXiv preprint arXiv:1801.06768},
+  year    = {2018},
+  file    = {:C\:/Users/cjdua/Documents/1801.06768.pdf:PDF},
+}
+
+@Article{rajkomar2018scalable,
+  author  = {Rajkomar, Alvin and Oren, Eyal and Chen, Kai and Dai, Andrew M and Hajaj, Nissan and Liu, Peter J and Liu, Xiaobing and Sun, Mimi and Sundberg, Patrik and Yee, Hector and others},
+  title   = {Scalable and accurate deep learning for electronic health records},
+  journal = {arXiv preprint arXiv:1801.07860},
+  year    = {2018},
+  file    = {:C\:/Users/cjdua/Documents/1801.07860.pdf:PDF},
+}
+
+@Book{,
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}
