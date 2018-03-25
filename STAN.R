@@ -188,7 +188,9 @@ n2
 dataList = list(y1 = y1, y2 = y2, xL=x1, xH = x2,  
                 N = N, Nl = n1, Nh = n2)
 
-#======== 
+#========
+remove(fit)
+#========
 
 fit = sampling(object = stanDso, data=dataList, 
                init=0, control=list(adapt_delta = 0.9),
@@ -201,20 +203,20 @@ summary(fit)
 
 #pairs(fit)
 
-plot(fit, ci_level = 0.90, pars=c("delta_l[1]", "delta_l[2]","delta_l[3]","delta_l[4]","delta_l[5]"), 
+plot(fit, ci_level = 0.95, pars=c("beta_0", "delta_h[1]", "delta_h[2]","delta_h[3]","delta_h[4]","delta_h[5]"), 
      
-  show_density=TRUE, fill_color="#aadeff") +
+ show_density=TRUE, fill_color="#aadeff") +
   
     geom_vline(xintercept = 0, linetype=2) + xlab("")+ylab("") + 
   
     theme_grey()#theme_Posterior
 
 
-get_posterior_mean(fit)
+#get_posterior_mean(fit)
 
-post <- extract(fit)
+#post <- extract(fit)
 
-nrow(post$delta_h)
+#nrow(post$delta_h)
 
 launch_shinystan(fit)
 #======== convert stan format to coda format ========== 
