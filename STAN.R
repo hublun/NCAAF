@@ -103,7 +103,8 @@ parameters {
   real <lower = 0> beta_01;  // intercept
   real <lower = 0> beta_02;  // intercept
 
- 
+  real <lower = 0> sigma_low;
+  real <lower = 0> sigma_high;
   
   real dev_high1[Nh]; // devation from average between leagues
   real dev_high2[Nh];
@@ -150,11 +151,16 @@ model{
 beta_01 ~ cauchy(0, 10);
 beta_02 ~ cauchy(0, 10);
 
+sigma_high ~ cauchy(0, 5);
+sigma_low ~ cauchy(0, 5);
 
-dev_high1 ~ normal(0, 2);
-dev_high2 ~ normal(0, 2);
-dev_low1 ~ normal(0, 2);
-dev_low2 ~ normal(0, 2);
+
+
+dev_high1 ~ normal(0, sigma_high);
+dev_high2 ~ normal(0, sigma_high);
+
+dev_low1 ~ normal(0, sigma_low);
+dev_low2 ~ normal(0, sigma_low);
 
 
 // likelihood 
@@ -189,7 +195,7 @@ dataList = list(y1 = y1, y2 = y2, xL=x1, xH = x2,
                 N = N, Nl = n1, Nh = n2)
 
 #========
-remove(fit)
+remove(fit, stanDso)
 #========
 
 fit = sampling(object = stanDso, data=dataList, 
@@ -204,9 +210,24 @@ summary(fit)
 # access and cgange parameter names for display
 
 names(fit)
-names(fit)[420]
-#names(fit)[420] <- "EPL"
 
+names(fit)[211]
+names(fit)[211] <- "Soccer"
+
+names(fit)[418]
+names(fit)[418] <- "La_Liga"
+
+names(fit)[419]
+names(fit)[419] <- "Serie_A"
+
+names(fit)[420]
+names(fit)[420] <- "Ligue_1"
+
+names(fit)[421]
+names(fit)[421] <- "Bundesliga"
+
+names(fit)[422]
+names(fit)[422] <- "EPL"
 
 pairs(fit)
 
@@ -214,17 +235,22 @@ pairs(fit)
 
 plot(fit, plotfun="rhat")
 
-plot(fit, plotfun="trace", pars=c("Soccer"))
+plot(fit, plotfun="trace", pars=c("delta_top"))
 
-plot(fit, ci_level = 0.50, point_est ="mean", est_color = "green",
+
+plot(fit, ci_level = 0.95, point_est ="mean", est_color = "#ffffff",
      
-show_outer_line = TRUE, outer_level = 0.95,
+  show_outer_line = TRUE, outer_level = 0.99,
      
-pars=c("Soccer", "La_Liga", "Serie_A","Ligue_1","Bundesliga","EPL"), 
+  pars=c("delta_top", "La_Liga", "Serie_A","Ligue_1","Bundesliga","EPL"), 
      
- show_density=FALSE, fill_color="#123489") +
+  show_density=TRUE, fill_color="#123489") +
   
-    geom_vline(xintercept = 0, linetype=2) + xlab("Goal Scoring Rate Differential (Home - Away)")+ylab("Level") + 
+    geom_vline(xintercept = 0, linetype=2) + xlab("Goal Scoring Rate Differential (Home - Away)")+ylab("Level") +
+  
+    scale_x_continuous(#name = label,
+                     expand = c(0,0), # no expansion buffer 
+      breaks = seq(0, 1.5, 0.2), limits=c(0, 1.2)) +
   
     theme_light()#theme_Posterior
 
