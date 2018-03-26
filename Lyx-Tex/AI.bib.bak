@@ -85,20 +85,6 @@
   publisher = {IOP Publishing},
 }
 
-@Article{Athey2017,
-  author    = {Susan Athey},
-  title     = {Beyond prediction: Using big data for policy problems},
-  journal   = {Science},
-  year      = {2017},
-  volume    = {355},
-  number    = {6324},
-  pages     = {483--485},
-  month     = {feb},
-  doi       = {10.1126/science.aal4321},
-  file      = {:C\:/Users/cjdua/Documents/483.full.pdf:PDF},
-  publisher = {American Association for the Advancement of Science ({AAAS})},
-}
-
 @Article{Chen2017,
   author    = {Gang Chen and Yaqiong Xiao and Paul A Taylor and Justin K Rajendra and Tracy Riggins and Fengji Geng and Elizabeth Redcay and Robert W Cox},
   title     = {Handling Multiplicity in Neuroimaging through Bayesian Lenses with Multilevel Modeling},
@@ -132,17 +118,6 @@
   year          = {2017},
   __markedentry = {[cjdua:]},
   file          = {:C\:/Users/cjdua/Documents/1801.00282.pdf:PDF},
-}
-
-@InProceedings{Dash2003,
-  author        = {Dash, Denver and Cooper, Gregory F},
-  title         = {Model-Averaging with Discrete Bayesian Network Classifiers},
-  booktitle     = {Proc. 9th Int. Workshop Artif. Intell. Statist.},
-  year          = {2003},
-  pages         = {38--45},
-  organization  = {Citeseer},
-  __markedentry = {[cjdua:6]},
-  file          = {:C\:/Users/cjdua/Documents/download.pdf:PDF},
 }
 
 @Article{pearl2018theoretical,

@@ -85,7 +85,7 @@ model{
   y2 ~ normal(mu2, 2);
 }"
 #=================================================
-mPois3 ="
+mPoisson ="
 
 data{
   int<lower = 1> N;// lower bound is 0
@@ -115,7 +115,7 @@ parameters {
 
 transformed parameters{
 
-  real beta_0;
+  real delta_top;
 
   real<lower=0> lambda_h1[Nh];
   real<lower=0> lambda_h2[Nh];
@@ -126,7 +126,7 @@ transformed parameters{
   real delta_h[Nh]; //rate differential at league level
   real delta_l[Nl]; // rate differential at club level
  
-  beta_0 = beta_01 - beta_02;
+  delta_top = beta_01 - beta_02;
 
 
 for (i in 1:N){
@@ -170,7 +170,7 @@ for (i in 1:N){
 #===========compile model ========================
 #stanDso = stan_model(model_code = simplePoisson) 
 
-stanDso = stan_model(model_code = mPois3) 
+stanDso = stan_model(model_code = mPoisson) 
 #===============  Data Feed ======================
 
 N=length(HWS$yH)
@@ -201,22 +201,41 @@ class(fit)
 traceplot(fit)
 summary(fit)
 
-#pairs(fit)
+# access and cgange parameter names for display
 
-plot(fit, ci_level = 0.95, pars=c("beta_0", "delta_h[1]", "delta_h[2]","delta_h[3]","delta_h[4]","delta_h[5]"), 
+names(fit)
+names(fit)[420]
+#names(fit)[420] <- "EPL"
+
+
+pairs(fit)
+
+# stan plot functions
+
+plot(fit, plotfun="rhat")
+
+plot(fit, plotfun="trace", pars=c("Soccer"))
+
+plot(fit, ci_level = 0.50, point_est ="mean", est_color = "green",
      
- show_density=TRUE, fill_color="#aadeff") +
+show_outer_line = TRUE, outer_level = 0.95,
+     
+pars=c("Soccer", "La_Liga", "Serie_A","Ligue_1","Bundesliga","EPL"), 
+     
+ show_density=FALSE, fill_color="#123489") +
   
-    geom_vline(xintercept = 0, linetype=2) + xlab("")+ylab("") + 
+    geom_vline(xintercept = 0, linetype=2) + xlab("Goal Scoring Rate Differential (Home - Away)")+ylab("Level") + 
   
-    theme_grey()#theme_Posterior
+    theme_light()#theme_Posterior
 
 
-#get_posterior_mean(fit)
+get_posterior_mean(fit)
 
-#post <- extract(fit)
+
+post <- extract(fit)
 
 #nrow(post$delta_h)
+#shinystan for plots and analysis
 
 launch_shinystan(fit)
 #======== convert stan format to coda format ========== 
