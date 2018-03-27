@@ -235,7 +235,7 @@ pairs(fit)
 
 plot(fit, plotfun="rhat")
 
-plot(fit, plotfun="trace", pars=c("delta_top"))
+plot(fit, plotfun="trace", pars=c("delta_l[1]"))
 
 
 plot(fit, ci_level = 0.95, point_est ="mean", est_color = "#ffffff",
@@ -253,6 +253,33 @@ plot(fit, ci_level = 0.95, point_est ="mean", est_color = "#ffffff",
       breaks = seq(0, 1.5, 0.2), limits=c(0, 1.2)) +
   
     theme_light()#theme_Posterior
+
+
+
+plot(fit, ci_level = 0.90, point_est ="mean", est_color = "#126622",
+     
+      show_outer_line = TRUE, outer_level = 0.95,
+     
+      pars=c("delta_l[1]", "delta_l[2]", "delta_l[3]", "delta_l[4]", "delta_l[5]", 
+            "delta_l[6]", "delta_l[7]", "delta_l[8]", "delta_l[9]", "delta_l[10]",
+            "delta_l[11]", "delta_l[12]", "delta_l[13]", "delta_l[14]", "delta_l[15]",
+            "delta_l[16]", "delta_l[17]", "delta_l[18]", "delta_l[19]", "delta_l[20]"), 
+     
+      show_density=FALSE, fill_color="#123489") + geom_vline(xintercept = 0, linetype=2) +
+  
+      xlab("Goal Scoring Rate Differential (Home - Away)")+ylab("Team") +
+  
+  scale_x_continuous(#name = label,
+    expand = c(0,0), # no expansion buffer 
+    breaks = seq(-1, 1.5, 0.2), limits=c(-0.4, 1.6)) +
+  
+  theme_light()#theme_Posterior
+
+
+
+
+
+
 
 
 get_posterior_mean(fit)
