@@ -235,14 +235,14 @@ pairs(fit)
 
 plot(fit, plotfun="rhat")
 
-plot(fit, plotfun="trace", pars=c("delta_l[1]"))
+plot(fit, plotfun="trace", pars=c("AS_Nancy_Lorraine"))
 
 
 plot(fit, ci_level = 0.95, point_est ="mean", est_color = "#ffffff",
      
   show_outer_line = TRUE, outer_level = 0.99,
      
-  pars=c("delta_top", "La_Liga", "Serie_A","Ligue_1","Bundesliga","EPL"), 
+  pars=c("AS_Nancy_Lorraine"), 
      
   show_density=TRUE, fill_color="#123489") +
   
@@ -250,7 +250,7 @@ plot(fit, ci_level = 0.95, point_est ="mean", est_color = "#ffffff",
   
     scale_x_continuous(#name = label,
                      expand = c(0,0), # no expansion buffer 
-      breaks = seq(0, 1.5, 0.2), limits=c(0, 1.2)) +
+      breaks = seq(0, 1.5, 0.2), limits=c(-0.5, 2.0)) +
   
     theme_light()#theme_Posterior
 

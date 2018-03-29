@@ -179,21 +179,20 @@
 }
 
 @Article{Theis2015,
-  author        = {Lucas Theis and Aäron van den Oord and Matthias Bethge},
-  title         = {A note on the evaluation of generative models},
-  __markedentry = {[cjdua:]},
-  abstract      = {Probabilistic generative models can be used for compression, denoising, inpainting, texture synthesis, semi-supervised learning, unsupervised feature learning, and other tasks. Given this wide range of applications, it is not surprising that a lot of heterogeneity exists in the way these models are formulated, trained, and evaluated. As a consequence, direct comparison between models is often difficult. This article reviews mostly known but often underappreciated properties relating to the evaluation and interpretation of generative models with a focus on image models. In particular, we show that three of the currently most commonly used criteria---average log-likelihood, Parzen window estimates, and visual fidelity of samples---are largely independent of each other when the data is high-dimensional. Good performance with respect to one criterion therefore need not imply good performance with respect to the other criteria. Our results show that extrapolation from one criterion to another is not warranted and generative models need to be evaluated directly with respect to the application(s) they were intended for. In addition, we provide examples demonstrating that Parzen window estimates should generally be avoided.},
-  date          = {2015-11-05},
-  eprint        = {1511.01844v3},
-  eprintclass   = {stat.ML},
-  eprinttype    = {arXiv},
-  keywords      = {stat.ML, cs.LG},
+  author      = {Lucas Theis and Aäron van den Oord and Matthias Bethge},
+  title       = {A note on the evaluation of generative models},
+  abstract    = {Probabilistic generative models can be used for compression, denoising, inpainting, texture synthesis, semi-supervised learning, unsupervised feature learning, and other tasks. Given this wide range of applications, it is not surprising that a lot of heterogeneity exists in the way these models are formulated, trained, and evaluated. As a consequence, direct comparison between models is often difficult. This article reviews mostly known but often underappreciated properties relating to the evaluation and interpretation of generative models with a focus on image models. In particular, we show that three of the currently most commonly used criteria---average log-likelihood, Parzen window estimates, and visual fidelity of samples---are largely independent of each other when the data is high-dimensional. Good performance with respect to one criterion therefore need not imply good performance with respect to the other criteria. Our results show that extrapolation from one criterion to another is not warranted and generative models need to be evaluated directly with respect to the application(s) they were intended for. In addition, we provide examples demonstrating that Parzen window estimates should generally be avoided.},
+  date        = {2015-11-05},
+  eprint      = {1511.01844v3},
+  eprintclass = {stat.ML},
+  eprinttype  = {arXiv},
+  keywords    = {stat.ML, cs.LG},
 }
 
 @Article{Lucic2017,
   author        = {Mario Lucic and Karol Kurach and Marcin Michalski and Sylvain Gelly and Olivier Bousquet},
   title         = {Are GANs Created Equal? A Large-Scale Study},
-  __markedentry = {[cjdua:6]},
+  __markedentry = {[cjdua:]},
   abstract      = {Generative adversarial networks (GAN) are a powerful subclass of generative models. Despite a very rich research activity leading to numerous interesting GAN algorithms, it is still very hard to assess which algorithm(s) perform better than others. We conduct a neutral, multi-faceted large-scale empirical study on state-of-the art models and evaluation measures. We find that most models can reach similar scores with enough hyperparameter optimization and random restarts. This suggests that improvements can arise from a higher computational budget and tuning more than fundamental algorithmic changes. To overcome some limitations of the current metrics, we also propose several data sets on which precision and recall can be computed. Our experimental results suggest that future GAN research should be based on more systematic and objective evaluation procedures. Finally, we did not find evidence that any of the tested algorithms consistently outperforms the original one.},
   date          = {2017-11-28},
   eprint        = {1711.10337v3},
@@ -201,6 +200,19 @@
   eprinttype    = {arXiv},
   file          = {online:http\://arxiv.org/pdf/1711.10337v3:PDF;:D\:/Github/Informs/Articles/2018.arXiv.1711.10337.pdf:PDF},
   keywords      = {stat.ML, cs.LG},
+}
+
+@Article{Koh2017,
+  author        = {Pang Wei Koh and Percy Liang},
+  title         = {Understanding Black-box Predictions via Influence Functions},
+  __markedentry = {[cjdua:6]},
+  abstract      = {How can we explain the predictions of a black-box model? In this paper, we use influence functions -- a classic technique from robust statistics -- to trace a model's prediction through the learning algorithm and back to its training data, thereby identifying training points most responsible for a given prediction. To scale up influence functions to modern machine learning settings, we develop a simple, efficient implementation that requires only oracle access to gradients and Hessian-vector products. We show that even on non-convex and non-differentiable models where the theory breaks down, approximations to influence functions can still provide valuable information. On linear models and convolutional neural networks, we demonstrate that influence functions are useful for multiple purposes: understanding model behavior, debugging models, detecting dataset errors, and even creating visually-indistinguishable training-set attacks.},
+  date          = {2017-03-14},
+  eprint        = {1703.04730v2},
+  eprintclass   = {stat.ML},
+  eprinttype    = {arXiv},
+  file          = {online:D\:/Github/Informs/Articles/2017.arXiv.1703.04730.pdf:URL},
+  keywords      = {stat.ML, cs.AI, cs.LG},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}
