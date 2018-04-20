@@ -190,29 +190,87 @@
 }
 
 @Article{Lucic2017,
-  author        = {Mario Lucic and Karol Kurach and Marcin Michalski and Sylvain Gelly and Olivier Bousquet},
-  title         = {Are GANs Created Equal? A Large-Scale Study},
-  __markedentry = {[cjdua:]},
-  abstract      = {Generative adversarial networks (GAN) are a powerful subclass of generative models. Despite a very rich research activity leading to numerous interesting GAN algorithms, it is still very hard to assess which algorithm(s) perform better than others. We conduct a neutral, multi-faceted large-scale empirical study on state-of-the art models and evaluation measures. We find that most models can reach similar scores with enough hyperparameter optimization and random restarts. This suggests that improvements can arise from a higher computational budget and tuning more than fundamental algorithmic changes. To overcome some limitations of the current metrics, we also propose several data sets on which precision and recall can be computed. Our experimental results suggest that future GAN research should be based on more systematic and objective evaluation procedures. Finally, we did not find evidence that any of the tested algorithms consistently outperforms the original one.},
-  date          = {2017-11-28},
-  eprint        = {1711.10337v3},
-  eprintclass   = {stat.ML},
-  eprinttype    = {arXiv},
-  file          = {online:http\://arxiv.org/pdf/1711.10337v3:PDF;:D\:/Github/Informs/Articles/2018.arXiv.1711.10337.pdf:PDF},
-  keywords      = {stat.ML, cs.LG},
+  author      = {Mario Lucic and Karol Kurach and Marcin Michalski and Sylvain Gelly and Olivier Bousquet},
+  title       = {Are GANs Created Equal? A Large-Scale Study},
+  abstract    = {Generative adversarial networks (GAN) are a powerful subclass of generative models. Despite a very rich research activity leading to numerous interesting GAN algorithms, it is still very hard to assess which algorithm(s) perform better than others. We conduct a neutral, multi-faceted large-scale empirical study on state-of-the art models and evaluation measures. We find that most models can reach similar scores with enough hyperparameter optimization and random restarts. This suggests that improvements can arise from a higher computational budget and tuning more than fundamental algorithmic changes. To overcome some limitations of the current metrics, we also propose several data sets on which precision and recall can be computed. Our experimental results suggest that future GAN research should be based on more systematic and objective evaluation procedures. Finally, we did not find evidence that any of the tested algorithms consistently outperforms the original one.},
+  date        = {2017-11-28},
+  eprint      = {1711.10337v3},
+  eprintclass = {stat.ML},
+  eprinttype  = {arXiv},
+  file        = {online:http\://arxiv.org/pdf/1711.10337v3:PDF;:D\:/Github/Informs/Articles/2018.arXiv.1711.10337.pdf:PDF},
+  keywords    = {stat.ML, cs.LG},
 }
 
 @Article{Koh2017,
-  author        = {Pang Wei Koh and Percy Liang},
-  title         = {Understanding Black-box Predictions via Influence Functions},
-  __markedentry = {[cjdua:6]},
-  abstract      = {How can we explain the predictions of a black-box model? In this paper, we use influence functions -- a classic technique from robust statistics -- to trace a model's prediction through the learning algorithm and back to its training data, thereby identifying training points most responsible for a given prediction. To scale up influence functions to modern machine learning settings, we develop a simple, efficient implementation that requires only oracle access to gradients and Hessian-vector products. We show that even on non-convex and non-differentiable models where the theory breaks down, approximations to influence functions can still provide valuable information. On linear models and convolutional neural networks, we demonstrate that influence functions are useful for multiple purposes: understanding model behavior, debugging models, detecting dataset errors, and even creating visually-indistinguishable training-set attacks.},
-  date          = {2017-03-14},
-  eprint        = {1703.04730v2},
-  eprintclass   = {stat.ML},
+  author      = {Pang Wei Koh and Percy Liang},
+  title       = {Understanding Black-box Predictions via Influence Functions},
+  abstract    = {How can we explain the predictions of a black-box model? In this paper, we use influence functions -- a classic technique from robust statistics -- to trace a model's prediction through the learning algorithm and back to its training data, thereby identifying training points most responsible for a given prediction. To scale up influence functions to modern machine learning settings, we develop a simple, efficient implementation that requires only oracle access to gradients and Hessian-vector products. We show that even on non-convex and non-differentiable models where the theory breaks down, approximations to influence functions can still provide valuable information. On linear models and convolutional neural networks, we demonstrate that influence functions are useful for multiple purposes: understanding model behavior, debugging models, detecting dataset errors, and even creating visually-indistinguishable training-set attacks.},
+  date        = {2017-03-14},
+  eprint      = {1703.04730v2},
+  eprintclass = {stat.ML},
+  eprinttype  = {arXiv},
+  file        = {online:D\:/Github/Informs/Articles/2017.arXiv.1703.04730.pdf:URL},
+  keywords    = {stat.ML, cs.AI, cs.LG},
+}
+
+@Article{Ching20170387,
+  author    = {Ching, Travers and Himmelstein, Daniel S. and Beaulieu-Jones, Brett K. and Kalinin, Alexandr A. and Do, Brian T. and Way, Gregory P. and Ferrero, Enrico and Agapow, Paul-Michael and Zietz, Michael and Hoffman, Michael M. and Xie, Wei and Rosen, Gail L. and Lengerich, Benjamin J. and Israeli, Johnny and Lanchantin, Jack and Woloszynek, Stephen and Carpenter, Anne E. and Shrikumar, Avanti and Xu, Jinbo and Cofer, Evan M. and Lavender, Christopher A. and Turaga, Srinivas C. and Alexandari, Amr M. and Lu, Zhiyong and Harris, David J. and DeCaprio, Dave and Qi, Yanjun and Kundaje, Anshul and Peng, Yifan and Wiley, Laura K. and Segler, Marwin H. S. and Boca, Simina M. and Swamidass, S. Joshua and Huang, Austin and Gitter, Anthony and Greene, Casey S.},
+  title     = {Opportunities and obstacles for deep learning in biology and medicine},
+  journal   = {Journal of The Royal Society Interface},
+  year      = {2018},
+  volume    = {15},
+  number    = {141},
+  issn      = {1742-5689},
+  abstract  = {Deep learning describes a class of machine learning algorithms that are capable of combining raw inputs into layers of intermediate features. These algorithms have recently shown impressive results across a variety of domains. Biology and medicine are data-rich disciplines, but the data are complex and often ill-understood. Hence, deep learning techniques may be particularly well suited to solve problems of these fields. We examine applications of deep learning to a variety of biomedical problems{\textemdash}patient classification, fundamental biological processes and treatment of patients{\textemdash}and discuss whether deep learning will be able to transform these tasks or if the biomedical sphere poses unique challenges. Following from an extensive literature review, we find that deep learning has yet to revolutionize biomedicine or definitively resolve any of the most pressing challenges in the field, but promising advances have been made on the prior state of the art. Even though improvements over previous baselines have been modest in general, the recent progress indicates that deep learning methods will provide valuable means for speeding up or aiding human investigation. Though progress has been made linking a specific neural network{\textquoteright}s prediction to input features, understanding how users should interpret these models to make testable hypotheses about the system under study remains an open challenge. Furthermore, the limited amount of labelled data for training presents problems in some domains, as do legal and privacy constraints on work with sensitive health records. Nonetheless, we foresee deep learning enabling changes at both bench and bedside with the potential to transform several areas of biology and medicine.},
+  doi       = {10.1098/rsif.2017.0387},
+  eprint    = {http://rsif.royalsocietypublishing.org/content/15/141/20170387.full.pdf},
+  file      = {:D\:/Github/Informs/Articles/20170387.full.pdf:PDF},
+  publisher = {The Royal Society},
+  url       = {http://rsif.royalsocietypublishing.org/content/15/141/20170387},
+}
+
+@Article{Yeung2018,
+  author    = {Serena Yeung and N. Lance Downing and Li Fei-Fei and Arnold Milstein},
+  title     = {Bedside Computer Vision {\textemdash} Moving Artificial Intelligence from Driver Assistance to Patient Safety},
+  journal   = {New England Journal of Medicine},
+  year      = {2018},
+  volume    = {378},
+  number    = {14},
+  pages     = {1271--1273},
+  month     = {apr},
+  doi       = {10.1056/nejmp1716891},
+  file      = {:D\:/Github/Informs/Articles/nejmp1716891[1819].pdf:PDF},
+  publisher = {New England Journal of Medicine ({NEJM}/{MMS})},
+}
+
+@Article{Caselli2018,
+  author   = {Francesco Caselli and Alan Manning},
+  title    = {Robot Arithmetic: New Technology And Wages},
+  journal  = {AER Insights},
+  year     = {2018},
+  abstract = {Existing economic models show how new technology can cause large changes in relative
+wages and inequality. But there are also claims, based largely on verbal expositions, that new
+technology can harm workers on average or even all workers. This paper shows – under
+plausible assumptions - that new technology is unlikely to cause wages for all workers to fall
+and will cause average wages to rise if the prices of investment goods fall relative to
+consumer goods (a condition supported by the data). We outline how results may change
+with different assumptions.},
+  doi      = {10.1257/aeri.20170036},
+  file     = {:D\:/Github/Informs/Articles/Manning__robot-arithmatic--author-merged.pdf:PDF},
+}
+
+@Article{Ha2018,
+  author        = {David Ha and Jürgen Schmidhuber},
+  title         = {World Models},
+  __markedentry = {[dulunche:6]},
+  abstract      = {We explore building generative neural network models of popular reinforcement learning environments. Our world model can be trained quickly in an unsupervised manner to learn a compressed spatial and temporal representation of the environment. By using features extracted from the world model as inputs to an agent, we can train a very compact and simple policy that can solve the required task. We can even train our agent entirely inside of its own hallucinated dream generated by its world model, and transfer this policy back into the actual environment. An interactive version of this paper is available at https://worldmodels.github.io/},
+  date          = {2018-03-27},
+  doi           = {10.5281/zenodo.1207631},
+  eprint        = {1803.10122v3},
+  eprintclass   = {cs.LG},
   eprinttype    = {arXiv},
-  file          = {online:D\:/Github/Informs/Articles/2017.arXiv.1703.04730.pdf:URL},
-  keywords      = {stat.ML, cs.AI, cs.LG},
+  file          = {:D\:/Github/Informs/Articles/1803.10122.pdf:PDF},
+  keywords      = {cs.LG, stat.ML},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}
