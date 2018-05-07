@@ -43,6 +43,19 @@ bl1 <- data.frame(from=c("A", "B"), to=c("B", "E"))
 bl2 <- matrix(c("A", "B", "B", "C"), ncol = 2, byrow = TRUE, dimnames = list(NULL, c("from", "to")))
 
 #============== Learning Soccer Network ============
+ddf = european_soccer_leagues[,c(1:11,15)]
+
+ddf$League[ddf$League=='bundesliga'] = 'Bundesliga'
+
+counts <- table(ddf$League)
+barplot(counts, main='Data Distriburtion among Leagues', axis.lty = 1)
+
+m.edf = as.matrix(edf)
+s.edf = scale(m.edf, center=colMeans(m.edf), scale=colMeans(m.edf)) # normalized matrix
+
+df.edf = as.data.frame(s.edf)
+colnames(df.edf)[6] = "LUBS"
+#===================================================
 colnames(df.edf)
 col.tie = c(5,7)
 col.notie = c(6,8)
