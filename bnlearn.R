@@ -1,3 +1,40 @@
+
+#============================= ET5 Data Input ==============================
+ET5.1 <- log(na.omit(ET5[,c(6:13, 17)]))  # remove records with NA and missing values
+
+
+
+
+colnames(ET5.1)[1] <- "MHG"
+colnames(ET5.1)[2] <- "MAG"
+colnames(ET5.1)[3] <- "LMV"
+colnames(ET5.1)[4] <- "LMD"
+colnames(ET5.1)[5] <- "LWS"
+colnames(ET5.1)[6] <- "LUS"
+colnames(ET5.1)[7] <- "LLS"
+colnames(ET5.1)[8] <- "LLDS"
+colnames(ET5.1)[9] <- "AATT"
+colnames(ET5.1)
+head(ET5.1)
+
+ET5.2 <- scale(ET5.1, center=colMeans(ET5.1), scale=colMeans(ET5.1))
+ET5.3 <- data.frame(ET5.2) # change matrix to dataframe
+head(ET5.3)
+ET5.4 <- ET5.3[,-c(6,8)]  # create not draw set 
+head(ET5.4)
+#======== Check Distribution =====================
+ggplot(data=ET5.4, mapping=aes(x = LLS)) +
+  geom_histogram(aes(y=..density..), col="blue", fill="green") +
+  geom_density()
+#================= test run bnlearn ===============
+ETL.1 <- hc(ET5.4, score="bic-g") # Hill-Climbing learning
+ETL.2 <- iamb(ET5.4)
+
+plot(ETL.1)
+score(ETL.2, data = ET5.4)
+#-------------- construct network -----------------
+dim(ET5.4)[1]
+
 #============================= Correlation Matrix ==========================
 write.csv(df.edf, file = "SAS_File.csv")
 #============================= Regression Tree =============================
@@ -15,8 +52,8 @@ post(tree.att, file="", title="werty", bp=18)
 dev.off()
 #=============== Bayesian Learning ======================
 
-str(learning.test)
-bn.hc <- hc(learning.test, score = "aic")
+
+
 pdag = iamb(learning.test)
 pdag
 dag = pdag2dag(pdag, ordering = c("A", "B", "C", "D", "E", "F"))
