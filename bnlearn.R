@@ -1,6 +1,9 @@
+ET5$AATT = ET5$AggregatedAttendance / ET5$LargestAttendance
+ET5$AATT
 
+discretize()
 #============================= ET5 Data Input ==============================
-ET5.1 <- log(na.omit(ET5[,c(6:13, 17)]))  # remove records with NA and missing values
+ET5.1 <- log(na.omit(ET5[,c(6:13, 18)]))  # remove records with NA and missing values
 
 colnames(ET5.1)[1] <- "MHG"
 colnames(ET5.1)[2] <- "MAG"
@@ -14,6 +17,8 @@ colnames(ET5.1)[9] <- "AATT"
 colnames(ET5.1)
 head(ET5.1)
 
+
+
 #ET5.2 <- scale(ET5.1, center=colMeans(ET5.1), scale=colSD(ET5.1))
 #ET5.2 <- scale(ET5.1, center=colMeans(ET5.1)) # center only
 
@@ -22,13 +27,17 @@ head(ET5.1)
 
 #head(ET5.3)
 
+
+
+
+
 ET5.4 <- ET5.1[,-c(6,8)]  # create not draw set 
 head(ET5.4)
 
 #======== Check Distribution =====================
 
-ggplot(data=ET5.4, mapping=aes(x = LLS)) +
-  geom_histogram(aes(y=..density..), col="blue", fill="green") +
+ggplot(data=ET5.4, mapping=aes(x = MAG)) +
+  geom_histogram(aes(y=..density..), col="blue", fill="green", bins = 20) +
   geom_density()
 
 #---------------- Training and Testing Data Split -------------
@@ -96,9 +105,8 @@ remove(fit.Caret, pred.Caret)
 #================= Score based bnlearn Algorithm===============
 
 ETL.1 <- hc(ET5.4, score="bic-g") # Hill-Climbing learning
-fit.bn <- mmhc(data.fit) # hybrid-learning algorithm
+fit.bn <- hc(data.fit) # hybrid-learning algorithm
 modelstring(fit.bn)
-
 graphviz.plot(fit.bn)
 
 score(fit.bn, data = ET5.4)
