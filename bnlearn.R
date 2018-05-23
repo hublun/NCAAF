@@ -14,14 +14,15 @@ colnames(ET5.1)[9] <- "AATT"
 colnames(ET5.1)
 head(ET5.1)
 
-ET5.2 <- scale(ET5.1, center=colMeans(ET5.1), scale=colSD(ET5.1))
-ET5.2 <- scale(ET5.1, center=colMeans(ET5.1)) # center only
+#ET5.2 <- scale(ET5.1, center=colMeans(ET5.1), scale=colSD(ET5.1))
+#ET5.2 <- scale(ET5.1, center=colMeans(ET5.1)) # center only
 
 
-ET5.3 <- data.frame(ET5.2) # change matrix to dataframe
+#ET5.3 <- data.frame(ET5.2) # change matrix to dataframe
 
-head(ET5.3)
-ET5.4 <- ET5.3[,-c(6,8)]  # create not draw set 
+#head(ET5.3)
+
+ET5.4 <- ET5.1[,-c(6,8)]  # create not draw set 
 head(ET5.4)
 
 #======== Check Distribution =====================
@@ -104,7 +105,7 @@ score(fit.bn, data = ET5.4)
 
 #=========== predicting attendance based on learned network ====
 
-pred.2 <- predict(ETL.2, data = data.eval, node = "AATT", method = "bayes-lw")
+pred.2 <- predict(fit.bn, data = data.eval, node = "AATT", method = "bayes-lw")
 
 RMSE(pred.2, data.eval$AATT)
 #============= Compute RMSE root mean square error ========================
@@ -121,6 +122,7 @@ rmse(data.test$AATT, pred.2)
 
 dag = model2network("[MHG][MAG][LMD][LMV][LWS][LLS][AATT|MHG:LMV:LMD:MAG:LLS:LWS]")
 dag.1 = model2network("[MHG][MAG][LMD][LMV][LWS|MHG][LLS|MHG][AATT|MHG:MAG:LLS:LWS]")
+dag.2 = model2network("[AATT][MHG|AATT][MAG|AATT][LMD|AATT][LMV|AATT][LWS|AATT][LLS|AATT]")
 
 mdag <- moral(dag.1) #moral graph
 graphviz.plot(mdag)
@@ -130,11 +132,11 @@ str(fit.1)
 
 print(fit.1)
 
-
 score(bnet.1, data.test, type="bic-g")
 #------------- Cross-Validation ---------------------------------------
 
 bn.cv(bn = "hc", data=ET5.4, loss.args = list(target="AATT"), loss = "mse", runs=10, method = "k-fold") # 10-fold cross validation
+bn.cv(dag.1, data=ET5.4, loss.args = list(target="AATT"), loss = "mse", runs=10, method = "k-fold") # 10-fold cross validation
 
 cv.lm(data=ET5.4, form.lm = formula(AATT ~ .), m=10)
 
@@ -143,11 +145,6 @@ sqrt(0.002083162)
 #============================= Correlation Matrix ==========================
 write.csv(df.edf, file = "SAS_File.csv")
 #============================= Regression Tree =============================
- 
-
- 
- 
- 
 
 #========= building a network from model string ===================
 
