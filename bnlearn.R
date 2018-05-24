@@ -19,8 +19,8 @@ head(ET5.1)
 
 
 
-#ET5.2 <- scale(ET5.1, center=colMeans(ET5.1), scale=colSD(ET5.1))
-#ET5.2 <- scale(ET5.1, center=colMeans(ET5.1)) # center only
+#ET5.2 <- scale(ET5.1, center = colMeans(ET5.1), scale=colSD(ET5.1))
+#ET5.2 <- scale(ET5.1, center = colMeans(ET5.1)) # center only
 
 
 #ET5.3 <- data.frame(ET5.2) # change matrix to dataframe
