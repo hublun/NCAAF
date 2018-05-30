@@ -1,39 +1,31 @@
-ET5$AATT = ET5$AggregatedAttendance / ET5$LargestAttendance
-ET5$AATT
+#ET5$AATT = ET5$AggregatedAttendance / ET5$LargestAttendance
+#ET5$AATT
 
-discretize()
+#discretize()
 #============================= ET5 Data Input ==============================
-ET5.1 <- log(na.omit(ET5[,c(6:13, 18)]))  # remove records with NA and missing values
+#ET5.1 <- log(na.omit(ET5[,c(6:13, 18)]))  # remove records with NA and missing values
 
-colnames(ET5.1)[1] <- "MHG"
-colnames(ET5.1)[2] <- "MAG"
-colnames(ET5.1)[3] <- "LMV"
-colnames(ET5.1)[4] <- "LMD"
-colnames(ET5.1)[5] <- "LWS"
-colnames(ET5.1)[6] <- "LUS"
-colnames(ET5.1)[7] <- "LLS"
-colnames(ET5.1)[8] <- "LLDS"
-colnames(ET5.1)[9] <- "AATT"
-colnames(ET5.1)
-head(ET5.1)
-
-
+#colnames(ET5.1)[1] <- "MHG"
+#colnames(ET5.1)[2] <- "MAG"
+#colnames(ET5.1)[3] <- "LMV"
+#colnames(ET5.1)[4] <- "LMD"
+#colnames(ET5.1)[5] <- "LWS"
+#colnames(ET5.1)[6] <- "LUS"
+#colnames(ET5.1)[7] <- "LLS"
+#colnames(ET5.1)[8] <- "LLDS"
+#colnames(ET5.1)[9] <- "AATT"
+#colnames(ET5.1)
+#head(ET5.1)
 
 #ET5.2 <- scale(ET5.1, center = colMeans(ET5.1), scale=colSD(ET5.1))
 #ET5.2 <- scale(ET5.1, center = colMeans(ET5.1)) # center only
-
 
 #ET5.3 <- data.frame(ET5.2) # change matrix to dataframe
 
 #head(ET5.3)
 
-
-
-
-
-ET5.4 <- ET5.1[,-c(6,8)]  # create not draw set 
-head(ET5.4)
-
+#ET5.4 <- ET5.1[,-c(6,8)]  # create not draw set 
+#head(ET5.4)
 #======== Check Distribution =====================
 
 ggplot(data=ET5.4, mapping=aes(x = MAG)) +
