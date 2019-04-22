@@ -1,4 +1,4 @@
-#================= paralell computing multiple core =========
+#================== paralell computing multiple core =========
 rstan_options(auto_write = TRUE)
 options(mc.cores = parallel::detectCores())
 #============================================================
@@ -13,6 +13,8 @@ sm011 =  stan_model("Top5_Model_011.stan")
 sm11 = stan_model("Top5_Model_11.stan") 
 
 sm2 = stan_model("Top5_Model_2.stan") 
+
+Stan_Model_3L = stan_model("HFA_Stan_Model_3_Levels.stan") # 2019 April 
 #===============  Data Feed ======================
 
 N=length(HWS$yH)
@@ -40,38 +42,40 @@ dl2 = list(y1 = yg, y2 = yh, xL=xc, xH = xl,
 dl11 = list(yH = yh, yG = yg, xC = xc, N = length(HWS$yH), Nc=nc)
 dl12 = list(yH = yh, yG = yg, xC = xl, N = length(HWS$yH), Nc=nl)
 
-
+dataList_3L = list(y1 = yg, y2 = yh, xL=xc, xH = xl, N = N, Nl = nc, Nh = nl) # 2019.4 3 level model data list
 #============================================================
 remove(fit11, stanDso)
 #========
+
+stanfit_3L = sampling(object = Stan_Model_3L, data=dataList_3L, 
+                 init=0.1, control=list(adapt_delta = 0.95),
+                 chains=4, iter=888, warmup=444, thin=1)
+
 
 fit11 = sampling(object = sm011, data=dl12, 
                init=0.1, control=list(adapt_delta = 0.95),
                chains=4, iter=888, warmup=444, thin=1)
 
-class(fit11)
+class(stanfit_3L)
 
-traceplot(fit11)
-summary(fit11)
+traceplot(stanfit_3L)
+summary(stanfit_3L)
 
 # access and cgange parameter names for display
-
- 
-
-pairs(fit)
-
+pairs(stanfit_3L)
+names(stanfit_3L)
 # stan plot functions
+names(stanfit_3L)[1]
 
-plot(fit, plotfun="rhat")
+plot(stanfit_3L, plotfun="rhat")
+plot(stanfit_3L, plotfun="trace", pars=c("beta_01"))
 
-plot(fit, plotfun="trace", pars=c("AS_Nancy_Lorraine"))
 
-
-plot(fit, ci_level = 0.95, point_est ="mean", est_color = "#ffffff",
+plot(stanfit_3L, ci_level = 0.95, point_est ="mean", est_color = "#ffffff",
      
   show_outer_line = TRUE, outer_level = 0.99,
      
-  pars=c("AS_Nancy_Lorraine"), 
+  pars=c("beta_01"), 
      
   show_density=TRUE, fill_color="#123489") +
   
@@ -79,12 +83,12 @@ plot(fit, ci_level = 0.95, point_est ="mean", est_color = "#ffffff",
   
     scale_x_continuous(#name = label,
                      expand = c(0,0), # no expansion buffer 
-      breaks = seq(0, 1.5, 0.2), limits=c(-0.5, 2.0)) +
+      breaks = seq(0, 3.5, 0.2), limits=c(-0.5, 3.8)) +
   
     theme_light()#theme_Posterior
 
 
-
+#====================== extract data from stanfit object ====================
 get_posterior_mean(fit0)
 
 
@@ -101,7 +105,7 @@ dim(tdiff)
 #shinystan for plots and analysis
 
 launch_shinystan(fit11)
-#======== convert stan format to coda format ========== 
+  #======== convert stan format to coda format ========== 
 
 #================= setting up STAN =================
 Sys.which("g++")
