@@ -65,7 +65,8 @@ summary(stanfit_3L)
 pairs(stanfit_3L)
 names(stanfit_3L)
 # stan plot functions
-names(stanfit_3L)[1]
+names(stanfit_3L)[1] #name of the first parameter
+names(stanfit_3L)[1] <- "Soccer"
 
 plot(stanfit_3L, plotfun="rhat")
 plot(stanfit_3L, plotfun="trace", pars=c("beta_01"))
@@ -75,20 +76,20 @@ plot(stanfit_3L, ci_level = 0.95, point_est ="mean", est_color = "#ffffff",
      
   show_outer_line = TRUE, outer_level = 0.99,
      
-  pars=c("beta_01"), 
+  pars=c("beta_01"),  # sport level effect
      
   show_density=TRUE, fill_color="#123489") +
   
-    geom_vline(xintercept = 0, linetype=2) + xlab("Goal Scoring Rate Differential (Home - Away)")+ylab("Level") +
+    geom_vline(xintercept = 0, linetype=2) + xlab("Sport Level Influence (shaded 95% CI and 99% outline)")+ylab("Density") +
   
     scale_x_continuous(#name = label,
                      expand = c(0,0), # no expansion buffer 
-      breaks = seq(0, 3.5, 0.2), limits=c(-0.5, 3.8)) +
+      breaks = seq(0, 3.5, 0.4), limits=c(-0.5, 3.8)) +
   
     theme_light()#theme_Posterior
 
 
-#====================== extract data from stanfit object ====================
+  #====================== extract data from stanfit object ====================
 get_posterior_mean(fit0)
 
 
