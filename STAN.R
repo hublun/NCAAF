@@ -129,7 +129,34 @@ plot(stanfit_3L, ci_level = 0.95, point_est ="mean", est_color = "#ffffff",
   
   theme_light()#theme_Posterior  
   
+#================== plot league level impact diff ===========================
+index_club = 320
+names(stanfit_3L)[index_club] #name of the League parameter
+names(stanfit_3L)[index_club] <- "Arsenal"
 
+ 
+
+plot(stanfit_3L, ci_level = 0.95, point_est ="mean", est_color = "#ffffff",
+     
+     show_outer_line = TRUE, outer_level = 0.99,
+     
+     pars=c("Hull_City", "Swansea_City", "Stoke_City","AFC_Bournemouth", "Arsenal"),  # sport level effect
+     
+     show_density=FALSE, fill_color="#123489") +
+  
+  geom_vline(xintercept = 0, linetype=2) + 
+  
+  xlab("shaded 95% CI and outline 99% CI")+ylab("") +
+  
+  scale_x_continuous(#name = label,
+    expand = c(0,0), # no expansion buffer 
+    breaks = seq(-2, 2, 0.2), limits=c(-2, 2)) +
+  
+  #scale_y_continuous(#name = label,
+  #expand = c(0,0), # no expansion buffer 
+  #breaks = seq(0.95, 1.8, 0.1), limits=c(0.95, 1.82)) +  
+  
+  theme_light()#theme_Posterior  
 #====================== extract data from stanfit object ====================
 get_posterior_mean(fit0)
 
