@@ -14,7 +14,7 @@ sm11 = stan_model("Top5_Model_11.stan")
 
 sm2 = stan_model("Top5_Model_2.stan") 
 
-Stan_Model_3L = stan_model("HFA_Stan_Model_3_Levels.stan") # 2019 April 
+Stan_Model_3L = stan_model("HFA_Stan_Model_3_Levels_201906.stan") # 2019 April 
 #===============  Data Feed ======================
 
 N=length(HWS$yH)
@@ -42,9 +42,9 @@ dl2 = list(y1 = yg, y2 = yh, xL=xc, xH = xl,
 dl11 = list(yH = yh, yG = yg, xC = xc, N = length(HWS$yH), Nc=nc)
 dl12 = list(yH = yh, yG = yg, xC = xl, N = length(HWS$yH), Nc=nl)
 
-dataList_3L = list(y1 = yg, y2 = yh, xL=xc, xH = xl, N = N, Nl = nc, Nh = nl) # 2019.4 3 level model data list
+dataList_3L = list(y1 = yh, y2 = yg, xL=xc, xH = xl, N = N, Nl = nc, Nh = nl) # 2019.4 3 level model data list
 #============================================================
-remove(fit11, stanDso)
+remove(fit11, stanDso, stanfit_3L)
 #========
 
 stanfit_3L = sampling(object = Stan_Model_3L, data=dataList_3L, 
@@ -65,31 +65,72 @@ summary(stanfit_3L)
 pairs(stanfit_3L)
 names(stanfit_3L)
 # stan plot functions
-names(stanfit_3L)[1] #name of the first parameter
-names(stanfit_3L)[1] <- "Soccer"
+names(stanfit_3L)[127] #name of the first parameter
+names(stanfit_3L)[127] <- "Sport"
 
 plot(stanfit_3L, plotfun="rhat")
 plot(stanfit_3L, plotfun="trace", pars=c("beta_01"))
-
-
+      
+#============== plot sport level diff =======================================
 plot(stanfit_3L, ci_level = 0.95, point_est ="mean", est_color = "#ffffff",
      
   show_outer_line = TRUE, outer_level = 0.99,
      
-  pars=c("beta_01"),  # sport level effect
+  pars=c("delta_top"),  # sport level effect
      
   show_density=TRUE, fill_color="#123489") +
   
-    geom_vline(xintercept = 0, linetype=2) + xlab("Sport Level Influence (shaded 95% CI and 99% outline)")+ylab("Density") +
+    #geom_vline(xintercept = 0, linetype=2) + 
+  
+    xlab("shaded 95% CI and outline 99% CI")+ylab("") +
   
     scale_x_continuous(#name = label,
                      expand = c(0,0), # no expansion buffer 
-      breaks = seq(0, 3.5, 0.4), limits=c(-0.5, 3.8)) +
+      breaks = seq(0.0, 1.5, 0.5), limits=c(0.0, 1.5)) +
+
+    #scale_y_continuous(#name = label,
+    #expand = c(0,0), # no expansion buffer 
+    #breaks = seq(0.95, 1.8, 0.1), limits=c(0.95, 1.82)) +  
+
+      theme_light()#theme_Posterior
+#================== plot league level impact diff ===========================
+
+names(stanfit_3L)[312] #name of the League parameter
+names(stanfit_3L)[312] <- "LIGUE_1"
+
+names(stanfit_3L)[313] #name of the League parameter
+names(stanfit_3L)[313] <- "LA_LIGA"
+
+names(stanfit_3L)[314] #name of the League parameter
+names(stanfit_3L)[314] <- "BUNDESLIGA"
+
+names(stanfit_3L)[315] #name of the League parameter
+names(stanfit_3L)[315] <- "SERIE_A"
+
+plot(stanfit_3L, ci_level = 0.95, point_est ="mean", est_color = "#ffffff",
+     
+     show_outer_line = TRUE, outer_level = 0.99,
+     
+     pars=c("EPL", "LIGUE_1","LA_LIGA","BUNDESLIGA","SERIE_A"),  # sport level effect
+     
+     show_density=TRUE, fill_color="#123489") +
   
-    theme_light()#theme_Posterior
+  geom_vline(xintercept = 0, linetype=2) + 
+  
+  xlab("shaded 95% CI and outline 99% CI")+ylab("") +
+  
+  scale_x_continuous(#name = label,
+    expand = c(0,0), # no expansion buffer 
+    breaks = seq(-0.8, 0.8, 0.1), limits=c(-0.8, 0.8)) +
+  
+  #scale_y_continuous(#name = label,
+  #expand = c(0,0), # no expansion buffer 
+  #breaks = seq(0.95, 1.8, 0.1), limits=c(0.95, 1.82)) +  
+  
+  theme_light()#theme_Posterior  
+  
 
-
-  #====================== extract data from stanfit object ====================
+#====================== extract data from stanfit object ====================
 get_posterior_mean(fit0)
 
 
