@@ -16,6 +16,25 @@ sm2 = stan_model("Top5_Model_2.stan")
 
 Stan_Model_3L = stan_model("HFA_Stan_Model_3_Levels_201906.stan") # 2019 April 
 #===============  Data Feed ======================
+HWS <- ET5[,c(1,2,3,4,6,7)] # import from raw data
+head(HWS)
+
+HWS$xL = factor(HWS$LID, levels = unique(HWS$LID), labels = c("1","2","3","4","5"))
+HWS$League <- toupper(HWS$League)
+HWS$xC = factor(HWS$CID, levels = unique(HWS$CID), labels=1:98)       
+HWS$xS = factor(HWS$Season, levels=unique(HWS$Season), labels = 1:16)
+
+HWS$yH = as.integer(HWS$MostHomeGoals)
+HWS$yG = as.integer(HWS$MostAwayGoals)
+
+
+hist(HWS$yH)
+hist(HWS$yG)
+
+hist(HWS$yDiff[HWS$xS==5])
+HWS$League[HWS$xL==2]
+
+#==== prepare data list for MCMC ==========
 
 N=length(HWS$yH)
 yh= HWS$yH
@@ -65,13 +84,17 @@ summary(stanfit_3L)
 pairs(stanfit_3L)
 names(stanfit_3L)
 # stan plot functions
-names(stanfit_3L)[127] #name of the first parameter
-names(stanfit_3L)[127] <- "Sport"
+#names(stanfit_3L)[127] #name of the first parameter
+#names(stanfit_3L)[127] <- "Sport"
 
 plot(stanfit_3L, plotfun="rhat")
 plot(stanfit_3L, plotfun="trace", pars=c("beta_01"))
       
 #============== plot sport level diff =======================================
+index_club = 211
+names(stanfit_3L)[index_club] #name of the League parameter
+names(stanfit_3L)[index_club] <- "Soccer"
+
 plot(stanfit_3L, ci_level = 0.95, point_est ="mean", est_color = "#ffffff",
      
   show_outer_line = TRUE, outer_level = 0.99,
@@ -80,13 +103,13 @@ plot(stanfit_3L, ci_level = 0.95, point_est ="mean", est_color = "#ffffff",
      
   show_density=TRUE, fill_color="#123489") +
   
-    #geom_vline(xintercept = 0, linetype=2) + 
+    geom_vline(xintercept = 0, linetype=2) + 
   
     xlab("shaded 95% CI and outline 99% CI")+ylab("") +
   
     scale_x_continuous(#name = label,
                      expand = c(0,0), # no expansion buffer 
-      breaks = seq(0.0, 1.5, 0.5), limits=c(0.0, 1.5)) +
+      breaks = seq(0.0, 1.5, 0.2), limits=c(-0.2, 1.2)) +
 
     #scale_y_continuous(#name = label,
     #expand = c(0,0), # no expansion buffer 
@@ -95,23 +118,15 @@ plot(stanfit_3L, ci_level = 0.95, point_est ="mean", est_color = "#ffffff",
       theme_light()#theme_Posterior
 #================== plot league level impact diff ===========================
 
-names(stanfit_3L)[312] #name of the League parameter
-names(stanfit_3L)[312] <- "LIGUE_1"
-
-names(stanfit_3L)[313] #name of the League parameter
-names(stanfit_3L)[313] <- "LA_LIGA"
-
-names(stanfit_3L)[314] #name of the League parameter
-names(stanfit_3L)[314] <- "BUNDESLIGA"
-
-names(stanfit_3L)[315] #name of the League parameter
-names(stanfit_3L)[315] <- "SERIE_A"
+index_club = 525
+names(stanfit_3L)[index_club] #name of the League parameter
+names(stanfit_3L)[index_club] <- "EPL" 
 
 plot(stanfit_3L, ci_level = 0.95, point_est ="mean", est_color = "#ffffff",
      
      show_outer_line = TRUE, outer_level = 0.99,
      
-     pars=c("EPL", "LIGUE_1","LA_LIGA","BUNDESLIGA","SERIE_A"),  # sport level effect
+     pars=c("LA_LIGA", "SERIE_A", "LIGUE_1", "BUNDESLIGA", "EPL"),  # sport level effect
      
      show_density=TRUE, fill_color="#123489") +
   
@@ -130,17 +145,15 @@ plot(stanfit_3L, ci_level = 0.95, point_est ="mean", est_color = "#ffffff",
   theme_light()#theme_Posterior  
   
 #================== plot league level impact diff ===========================
-index_club = 320
+index_club = 530
 names(stanfit_3L)[index_club] #name of the League parameter
-names(stanfit_3L)[index_club] <- "Arsenal"
-
- 
-
+names(stanfit_3L)[index_club] <- "Atletico_Madrid"
+#---------Ligue 1 ------------
 plot(stanfit_3L, ci_level = 0.95, point_est ="mean", est_color = "#ffffff",
      
      show_outer_line = TRUE, outer_level = 0.99,
      
-     pars=c("Hull_City", "Swansea_City", "Stoke_City","AFC_Bournemouth", "Arsenal"),  # sport level effect
+     pars=c("Sporting_Gijon", "Barcelona", "Real_Madrid", "Granada", "Atletico_Madrid"),  # sport level effect
      
      show_density=FALSE, fill_color="#123489") +
   
@@ -150,7 +163,32 @@ plot(stanfit_3L, ci_level = 0.95, point_est ="mean", est_color = "#ffffff",
   
   scale_x_continuous(#name = label,
     expand = c(0,0), # no expansion buffer 
-    breaks = seq(-2, 2, 0.2), limits=c(-2, 2)) +
+    breaks = seq(-2.2, 2.2, 0.2), limits=c(-2.5, 2.2)) +
+  
+  #scale_y_continuous(#name = label,
+  #expand = c(0,0), # no expansion buffer 
+  #breaks = seq(0.95, 1.8, 0.1), limits=c(0.95, 1.82)) +  
+  
+  theme_light()#theme_Posterior  
+ 
+  #----------EPL--------------
+plot(stanfit_3L, ci_level = 0.95, point_est ="mean", est_color = "#ffffff",
+     
+     show_outer_line = TRUE, outer_level = 0.99,
+     
+     pars=c("Hull_City", "Swansea_City", "Stoke_City","AFC_Bournemouth", "Arsenal", "Manchester_United", "Chelsea", "	Liverpool",
+            "Sunderland", "Tottenham_Hotspur", "Everton", "Middlesborough", "West_Ham_United", "Leicester_City", "Southampton",
+            "Burnley", "Manchester_City", "West_Bromwich_Albion", "Crystal_Palace", "Watford"),  # sport level effect
+     
+     show_density=FALSE, fill_color="#123489") +
+  
+  geom_vline(xintercept = 0, linetype=2) + 
+  
+  xlab("shaded 95% CI and outline 99% CI")+ylab("") +
+  
+  scale_x_continuous(#name = label,
+    expand = c(0,0), # no expansion buffer 
+    breaks = seq(-2.2, 2.2, 0.2), limits=c(-2.5, 2.2)) +
   
   #scale_y_continuous(#name = label,
   #expand = c(0,0), # no expansion buffer 

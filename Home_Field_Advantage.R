@@ -34,16 +34,16 @@ if ( nCores < 4 ) {
 runjagsMethodDefault
 
 #==================  Prerpare Data ===================================
-#HWS <- ET5[,c(2,3,6,7)]
-#head(HWS)
+HWS <- ET5[,c(2,3,6,7)]
+head(HWS)
 
 HWS$xL = factor(HWS$LID, levels = unique(HWS$LID), labels = c("1","2","3","4","5"))
 HWS$League <- toupper(HWS$League)
 HWS$xC = factor(HWS$CID, levels = unique(HWS$CID), labels=1:98)       
-#HWS$xS = factor(HWS$Season, levels=unique(HWS$Season), labels = 1:16)
+HWS$xS = factor(HWS$Season, levels=unique(HWS$Season), labels = 1:16)
 
-#HWS$yH = as.integer(HWS$MostHomeGoals)
-#HWS$yG = as.integer(HWS$MostAwayGoals)
+HWS$yH = as.integer(HWS$MostHomeGoals)
+HWS$yG = as.integer(HWS$MostAwayGoals)
 
 
 hist(HWS$yH)
