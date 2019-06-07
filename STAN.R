@@ -144,43 +144,31 @@ plot(stanfit_3L, ci_level = 0.95, point_est ="mean", est_color = "#ffffff",
   
   theme_light()#theme_Posterior  
   
-#================== plot league level impact diff ===========================
-index_club = 530
-names(stanfit_3L)[index_club] #name of the League parameter
-names(stanfit_3L)[index_club] <- "Atletico_Madrid"
-#---------Ligue 1 ------------
-plot(stanfit_3L, ci_level = 0.95, point_est ="mean", est_color = "#ffffff",
-     
-     show_outer_line = TRUE, outer_level = 0.99,
-     
-     pars=c("Sporting_Gijon", "Barcelona", "Real_Madrid", "Granada", "Atletico_Madrid"),  # sport level effect
-     
-     show_density=FALSE, fill_color="#123489") +
-  
-  geom_vline(xintercept = 0, linetype=2) + 
-  
-  xlab("shaded 95% CI and outline 99% CI")+ylab("") +
-  
-  scale_x_continuous(#name = label,
-    expand = c(0,0), # no expansion buffer 
-    breaks = seq(-2.2, 2.2, 0.2), limits=c(-2.5, 2.2)) +
-  
-  #scale_y_continuous(#name = label,
-  #expand = c(0,0), # no expansion buffer 
-  #breaks = seq(0.95, 1.8, 0.1), limits=c(0.95, 1.82)) +  
-  
-  theme_light()#theme_Posterior  
+#================== plot team level impact diff ===========================
  
-  #----------EPL--------------
-plot(stanfit_3L, ci_level = 0.95, point_est ="mean", est_color = "#ffffff",
+ 
+#pars.la_liga = c("Sporting_Gijon", "Barcelona", "Real_Madrid", "Granada", "Atletico_Madrid", "Osasuna", "Leganes", "Sevilla",
+#            "Deportivo_La_Coruña", "Villarreal", "Real_Betis", "Real_Sociedad", "Las_Palmas", "Celta_Vigo", "Athletic_Bilbao",
+#            "Valencia", "	Espanyol", "	Eibar", "Alaves", "Malaga")   
      
-     show_outer_line = TRUE, outer_level = 0.99,
+#Serie_A.pars = c("Juventus", "AS_Roma", "Napoli", "Atalanta", "	Lazio", "AC_Milan", "Internazionale", "Fiorentina", "Torino", "Sampdoria",
+#                 "Cagliari", "Sassuolo", "Udinese", "Chievo_Verona", "Bologna", "Genoa", "Crotone", "Empoli", "Palermo", "US_Pescara")
+
+pars.Bundesliga = c("Bayern_Munich", "RB_Leipzig", "Borussia_Dortmund", "TSG_Hoffenheim", "FC_Cologne", "Hertha_Berlin", "SC_Freiburg",
+                    "Werder_Bremen", "Borussia_Monchengladbach", "Schalke_04", "Eintracht_Frankfurt", "Bayer_Leverkusen", "FC_Augsburg",
+                    "Hamburg_SV", "Mainz", "Vfl_Wolfsburg", "FC_Ingolstadt_04", "SV_Darmstadt_98")  
+index_club = 616
+names(stanfit_3L)[index_club] #name of the club parameter
+names(stanfit_3L)[index_club] <- "Stoke_City"
+
+pars.EPL = c("Chelsea", "Tottenham_Hotspur", "Manchester_City", "Liverpool", "Arsenal", "Manchester_United", "Everton", "Southampton",
+             "AFC_Bournemouth", "West_Bromwich_Albion", "West_Ham_United", "Leicester_City", "Stoke_City")
+
+
+
+plot(stanfit_3L, ci_level = 0.95, point_est ="mean", est_color = "#ffffff", show_outer_line = TRUE, outer_level = 0.99,
      
-     pars=c("Hull_City", "Swansea_City", "Stoke_City","AFC_Bournemouth", "Arsenal", "Manchester_United", "Chelsea", "	Liverpool",
-            "Sunderland", "Tottenham_Hotspur", "Everton", "Middlesborough", "West_Ham_United", "Leicester_City", "Southampton",
-            "Burnley", "Manchester_City", "West_Bromwich_Albion", "Crystal_Palace", "Watford"),  # sport level effect
-     
-     show_density=FALSE, fill_color="#123489") +
+     pars=pars.EPL,  show_density=FALSE, fill_color="#123489") +
   
   geom_vline(xintercept = 0, linetype=2) + 
   
@@ -188,14 +176,18 @@ plot(stanfit_3L, ci_level = 0.95, point_est ="mean", est_color = "#ffffff",
   
   scale_x_continuous(#name = label,
     expand = c(0,0), # no expansion buffer 
-    breaks = seq(-2.2, 2.2, 0.2), limits=c(-2.5, 2.2)) +
+    breaks = seq(-1.6, 1.6, 0.2), limits=c(-1.6, 1.6)) +
   
   #scale_y_continuous(#name = label,
   #expand = c(0,0), # no expansion buffer 
   #breaks = seq(0.95, 1.8, 0.1), limits=c(0.95, 1.82)) +  
   
   theme_light()#theme_Posterior  
+
+
 #====================== extract data from stanfit object ====================
+
+
 get_posterior_mean(fit0)
 
 
