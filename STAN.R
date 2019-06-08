@@ -6,6 +6,8 @@ options(mc.cores = parallel::detectCores())
 #===========Plot Gamma ================
 
 #===========compile model ========================
+remove(Stan_Model_3L)
+
 stanDso = stan_model("Top5_Model_0.stan") 
 
 sm011 =  stan_model("Top5_Model_011.stan") 
@@ -14,7 +16,7 @@ sm11 = stan_model("Top5_Model_11.stan")
 
 sm2 = stan_model("Top5_Model_2.stan") 
 
-Stan_Model_3L = stan_model("HFA_Stan_Model_3_Levels_201906.stan") # 2019 April 
+Stan_Model_3L = stan_model("HFA_Stan_Model_3_Levels_201906.stan")
 #===============  Data Feed ======================
 HWS <- ET5[,c(1,2,3,4,6,7)] # import from raw data
 head(HWS)
@@ -63,7 +65,7 @@ dl12 = list(yH = yh, yG = yg, xC = xl, N = length(HWS$yH), Nc=nl)
 
 dataList_3L = list(y1 = yh, y2 = yg, xL=xc, xH = xl, N = N, Nl = nc, Nh = nl) # 2019.4 3 level model data list
 #============================================================
-remove(fit11, stanDso, stanfit_3L)
+remove(Stan_Model_3L, stanfit_3L)
 #========
 
 stanfit_3L = sampling(object = Stan_Model_3L, data=dataList_3L, 
@@ -212,15 +214,25 @@ Sys.getenv('PATH')
 system('g++ -v')
 system('where make')
 Sys.which('g++')
+Sys.setenv(LOCAL_CPPFLAGS = '-march=native')
+
+pkgbuild::has_build_tools(debug = TRUE)
+
 
 dotR <- file.path(Sys.getenv("HOME"), ".R")
-if (!file.exists(dotR)) 
-  dir.create(dotR)
-M <- file.path(dotR, "Makevars")
-if (!file.exists(M)) 
-  file.create(M)
-cat("\nCXXFLAGS=-O3 -Wno-unused-variable -Wno-unused-function", 
+if (!file.exists(dotR)) dir.create(dotR)
+M <- file.path(dotR, ifelse(.Platform$OS.type == "windows", "Makevars.win", "Makevars"))
+if (!file.exists(M)) file.create(M)
+cat("\nCXX14FLAGS=-O3 -march=native -mtune=native",
+    if( grepl("^darwin", R.version$os)) "CXX14FLAGS += -arch x86_64 -ftemplate-depth-256" else 
+      if (.Platform$OS.type == "windows") "CXX11FLAGS=-O3 -march=native -mtune=native" else
+        "CXX14FLAGS += -fPIC",
     file = M, sep = "\n", append = TRUE)
+
+
+M <- file.path(Sys.getenv("HOME"), ".R", ifelse(.Platform$OS.type == "windows", "Makevars.win", "Makevars"))
+file.edit(M)
+
 
 fx <- inline::cxxfunction( signature(x = "integer", y = "numeric" ) , '
 	return ScalarReal( INTEGER(x)[0] * REAL(y)[0] ) ;
@@ -228,6 +240,5 @@ fx <- inline::cxxfunction( signature(x = "integer", y = "numeric" ) , '
 fx( 2L, 5 )
 
 remove.packages("rstan")
-
 remove.packages('Rcpp')
 #====================================================
