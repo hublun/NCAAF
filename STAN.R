@@ -97,7 +97,12 @@ index_club = 211
 names(stanfit_3L)[index_club] #name of the League parameter
 names(stanfit_3L)[index_club] <- "Soccer"
 
-plot(stanfit_3L, ci_level = 0.95, point_est ="mean", est_color = "#ffffff",
+
+
+
+
+
+plot_sport <- plot(stanfit_3L, ci_level = 0.95, point_est ="mean", est_color = "#ffffff",
      
   show_outer_line = TRUE, outer_level = 0.99,
      
@@ -107,48 +112,62 @@ plot(stanfit_3L, ci_level = 0.95, point_est ="mean", est_color = "#ffffff",
   
     geom_vline(xintercept = 0, linetype=2) + 
   
-    xlab("shaded 95% CI and outline 99% CI")+ylab("") +
+    #xlab("shaded 95% CI and outline 99% CI")+ylab("") +
   
     scale_x_continuous(#name = label,
                      expand = c(0,0), # no expansion buffer 
       breaks = seq(0.0, 1.5, 0.2), limits=c(-0.2, 1.2)) +
-
+  
+    scale_y_discrete("Soccer", labels= c("Soccer"="Sport")) +
     #scale_y_continuous(#name = label,
     #expand = c(0,0), # no expansion buffer 
     #breaks = seq(0.95, 1.8, 0.1), limits=c(0.95, 1.82)) +  
 
-      theme_light()#theme_Posterior
+      theme_light(base_size=24)#theme_Posterior
+
+p0 = plot_sport +
+  #coord_flip()  + 
+  theme(axis.title.x = element_blank(), axis.title.y = element_blank(), 
+                                  axis.text.x = element_text(face = 'bold'),
+        )  
 #================== plot league level impact diff ===========================
+names(stanfit_3L)[521:525] <- pars.names <- c("La_Liga","Serie_A","Ligue_1","Bundesliga","EPL")
 
-index_club = 525
-names(stanfit_3L)[index_club] #name of the League parameter
-names(stanfit_3L)[index_club] <- "EPL" 
+names(stanfit_3L)[521:525]
 
-plot(stanfit_3L, ci_level = 0.95, point_est ="mean", est_color = "#ffffff",
+plot_leagues = plot(stanfit_3L, ci_level = 0.95, point_est ="mean", est_color = "#ffffff",
      
      show_outer_line = TRUE, outer_level = 0.99,
      
-     pars=c("LA_LIGA", "SERIE_A", "LIGUE_1", "BUNDESLIGA", "EPL"),  # sport level effect
+     pars=pars.names,  # sport level effect
      
      show_density=TRUE, fill_color="#123489") +
   
-  geom_vline(xintercept = 0, linetype=2) + 
+  geom_vline(xintercept = 0, linetype=3, size=1) + 
   
-  xlab("shaded 95% CI and outline 99% CI")+ylab("") +
+  #xlab("shaded 95% CI and outline 99% CI")+ylab("") +
   
   scale_x_continuous(#name = label,
     expand = c(0,0), # no expansion buffer 
-    breaks = seq(-0.8, 0.8, 0.1), limits=c(-0.8, 0.8)) +
+    breaks = seq(-0.8, 0.8, 0.2), limits=c(-0.6, 0.6)) +
   
   #scale_y_continuous(#name = label,
   #expand = c(0,0), # no expansion buffer 
   #breaks = seq(0.95, 1.8, 0.1), limits=c(0.95, 1.82)) +  
   
-  theme_light()#theme_Posterior  
-  
+  theme_light(base_size = 22) #+ coord_flip()  
+
+p1 = plot_leagues +  theme(axis.title.x = element_blank(), axis.title.y = element_blank(), 
+                      axis.text.x = element_text(face = 'bold'))  
 #================== plot team level impact diff ===========================
- 
- 
+library(gridExtra)
+
+
+
+grid.arrange(p0, p1,
+             layout_matrix = matrix(c(1,2), ncol=2, byrow=TRUE))
+
+#========================================================================== 
 #pars.la_liga = c("Sporting_Gijon", "Barcelona", "Real_Madrid", "Granada", "Atletico_Madrid", "Osasuna", "Leganes", "Sevilla",
 #            "Deportivo_La_Coruña", "Villarreal", "Real_Betis", "Real_Sociedad", "Las_Palmas", "Celta_Vigo", "Athletic_Bilbao",
 #            "Valencia", "	Espanyol", "	Eibar", "Alaves", "Malaga")   
@@ -218,16 +237,7 @@ Sys.setenv(LOCAL_CPPFLAGS = '-march=native')
 
 pkgbuild::has_build_tools(debug = TRUE)
 
-
-dotR <- file.path(Sys.getenv("HOME"), ".R")
-if (!file.exists(dotR)) dir.create(dotR)
-M <- file.path(dotR, ifelse(.Platform$OS.type == "windows", "Makevars.win", "Makevars"))
-if (!file.exists(M)) file.create(M)
-cat("\nCXX14FLAGS=-O3 -march=native -mtune=native",
-    if( grepl("^darwin", R.version$os)) "CXX14FLAGS += -arch x86_64 -ftemplate-depth-256" else 
-      if (.Platform$OS.type == "windows") "CXX11FLAGS=-O3 -march=native -mtune=native" else
-        "CXX14FLAGS += -fPIC",
-    file = M, sep = "\n", append = TRUE)
+ 
 
 
 M <- file.path(Sys.getenv("HOME"), ".R", ifelse(.Platform$OS.type == "windows", "Makevars.win", "Makevars"))
