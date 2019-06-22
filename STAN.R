@@ -116,19 +116,19 @@ plot_sport <- plot(stanfit_3L, ci_level = 0.95, point_est ="mean", est_color = "
   
     scale_x_continuous(#name = label,
                      expand = c(0,0), # no expansion buffer 
-      breaks = seq(0.0, 1.5, 0.2), limits=c(-0.2, 1.2)) +
+      breaks = seq(-0.8, 1.6, 0.2), limits=c(-0.5, 1.1)) +
   
     scale_y_discrete("Soccer", labels= c("Soccer"="Sport")) +
     #scale_y_continuous(#name = label,
     #expand = c(0,0), # no expansion buffer 
     #breaks = seq(0.95, 1.8, 0.1), limits=c(0.95, 1.82)) +  
 
-      theme_light(base_size=24)#theme_Posterior
+      theme_light(base_size=22)#theme_Posterior
 
 p0 = plot_sport +
   #coord_flip()  + 
-  theme(axis.title.x = element_blank(), axis.title.y = element_blank(), 
-                                  axis.text.x = element_text(face = 'bold'),
+  theme(axis.title.x = element_blank(), axis.title.y = element_blank()
+                                  #axis.text.x = element_text(face = 'bold')
         )  
 #================== plot league level impact diff ===========================
 names(stanfit_3L)[521:525] <- pars.names <- c("La_Liga","Serie_A","Ligue_1","Bundesliga","EPL")
@@ -149,23 +149,26 @@ plot_leagues = plot(stanfit_3L, ci_level = 0.95, point_est ="mean", est_color = 
   
   scale_x_continuous(#name = label,
     expand = c(0,0), # no expansion buffer 
-    breaks = seq(-0.8, 0.8, 0.2), limits=c(-0.6, 0.6)) +
+    breaks = seq(-0.8, 1.2, 0.2), limits=c(-0.5, 1.1)) +
   
+  scale_y_discrete("Soccer", labels= c("Soccer"="Sport")) +  
   #scale_y_continuous(#name = label,
   #expand = c(0,0), # no expansion buffer 
   #breaks = seq(0.95, 1.8, 0.1), limits=c(0.95, 1.82)) +  
   
   theme_light(base_size = 22) #+ coord_flip()  
 
-p1 = plot_leagues +  theme(axis.title.x = element_blank(), axis.title.y = element_blank(), 
-                      axis.text.x = element_text(face = 'bold'))  
-#================== plot team level impact diff ===========================
+p1 = plot_leagues +  theme(axis.title.x = element_blank(), axis.title.y = element_blank() 
+                      #axis.text.x = element_text(face = 'bold')
+                      
+                      )  
+#================== Multiplot  ===========================
 library(gridExtra)
 
 
 
-grid.arrange(p0, p1,
-             layout_matrix = matrix(c(1,2), ncol=2, byrow=TRUE))
+grid.arrange(p11, p12, p13,p14, p15,
+             layout_matrix = matrix(c(1,2,3,4,5), ncol=1, byrow=TRUE))
 
 #========================================================================== 
 #pars.la_liga = c("Sporting_Gijon", "Barcelona", "Real_Madrid", "Granada", "Atletico_Madrid", "Osasuna", "Leganes", "Sevilla",
@@ -186,10 +189,15 @@ pars.EPL = c("Chelsea", "Tottenham_Hotspur", "Manchester_City", "Liverpool", "Ar
              "AFC_Bournemouth", "West_Bromwich_Albion", "West_Ham_United", "Leicester_City", "Stoke_City")
 
 
+par_names.la_liga <- names(stanfit_3L)[526:545]
+par_names.Serie_a <- names(stanfit_3L)[546:565]
+par_names.ligue_1 <- names(stanfit_3L)[566:585]
+par_names.bundesliga <- names(stanfit_3L)[586:603]
+par_names.epl <- names(stanfit_3L)[603:623]
 
-plot(stanfit_3L, ci_level = 0.95, point_est ="mean", est_color = "#ffffff", show_outer_line = TRUE, outer_level = 0.99,
+plot_bundesliga = plot(stanfit_3L, ci_level = 0.95, point_est ="mean", est_color = "#ffffff", show_outer_line = FALSE, outer_level = 0.99,
      
-     pars=pars.EPL,  show_density=FALSE, fill_color="#123489") +
+     pars=par_names.bundesliga,  show_density=FALSE, fill_color="#123489") +
   
   geom_vline(xintercept = 0, linetype=2) + 
   
@@ -197,20 +205,24 @@ plot(stanfit_3L, ci_level = 0.95, point_est ="mean", est_color = "#ffffff", show
   
   scale_x_continuous(#name = label,
     expand = c(0,0), # no expansion buffer 
-    breaks = seq(-1.6, 1.6, 0.2), limits=c(-1.6, 1.6)) +
-  
+    breaks = seq(-1.6, 1.6, 0.4), limits=c(-1.2, 1.2)) +
+
+  scale_y_discrete("Soccer", labels= c("Soccer"="Sport")) +  
+    
   #scale_y_continuous(#name = label,
   #expand = c(0,0), # no expansion buffer 
   #breaks = seq(0.95, 1.8, 0.1), limits=c(0.95, 1.82)) +  
   
-  theme_light()#theme_Posterior  
+  theme_light(base_size = 22)#theme_Posterior  
 
+p14 = plot_bundesliga + coord_flip() + theme(axis.title.x = element_blank(), axis.title.y = element_blank() 
+                           #axis.text.x = element_text(face = 'bold')
+                           
+)  
 
+p14
 #====================== extract data from stanfit object ====================
-
-
 get_posterior_mean(fit0)
-
 
 post <- extract(fit11)
 
